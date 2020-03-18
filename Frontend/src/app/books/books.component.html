@@ -1,0 +1,32 @@
+<h3>Search for Books</h3>
+
+    <div>
+        <div class="search">
+           <input type="text" class="searchTerm" placeholder="Enter Book Name or ISBN">
+           <button type="submit" class="searchButton">
+             <i class="fa fa-search"></i>
+          </button>
+        </div>
+     </div>
+
+    <br>
+    <div class="table-responsive">  
+        <table class="table">
+            <tr>
+                <th>Item Id</th> 
+                <th>Item Name</th>
+                <th>ISBN-13</th>
+                <th>ISBN-10</th>
+                <th>Author</th>
+                <th>Publisher</th>
+            </tr>
+            <tr *ngFor="let book of books">
+                <td>{{book.ItemID}}</td>
+                <td>{{book.ItemName}}</td>
+                <td>{{book.ISBN13}}</td>
+                <td>{{book.ISBN10}}</td>
+                <td>{{book.AuthorId}}</td>
+                <td>{{book.PublisherId}}</td>
+            </tr>
+        </table>
+    </div>

@@ -1,5 +1,6 @@
 
 I searched and figured out to create a RESTful backend for our Web Project, using ExpressJs as backend connected to SQL Server database.
+The frontend would be in Angular.
 
 TOOLS:
 
@@ -9,7 +10,7 @@ Node Package Manager
 Postman (For testing database)
 VS Code (An IDE for coding)
 
-STEPS:
+STEPS FOR BACKEND:
 1. Download and install the software.
 2. Browse to "./Backend/." and type 'npm install' on the PowerShell.
 3. Open SSMS to configure the user & password for localhost
@@ -39,3 +40,13 @@ STEPS:
 	d. DELETE: Same as PUT
 	
 15. So far I remember that followed the steps above to make it work, if it won't work for you, feel free to ask me.
+
+STEPS FOR FRONTEND:
+1. Clone the code
+2. Browse to the "./FrontEnd/." and open the directory in VS Code.
+3. In the Integrated Terminal, enter 'npm install'
+4. After installation enter 'npm start' in the prompt
+5. Navigate to 'localhost:4200/books'
+6. So far, I just implemented GET HTTP request to load all books. Let me know if you have any questions for me. I'd be glad to help!
+
+![Getting Started](Screenshot.jpg)

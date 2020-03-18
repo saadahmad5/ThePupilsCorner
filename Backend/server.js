@@ -64,7 +64,8 @@ app.get("/api/books", function(req , res){
 
 //PUT API
  app.put("/api/books/:id", function(req , res){
-	var query = "UPDATE Books SET ItemName= '" + req.body.ItemName  +  "' , ISBN13= '" + req.body.ISBN13 + "', ISBN10 = '" + req.body.ISBN10 + "'  WHERE ItemId= " + req.params.id;
+	var query = "UPDATE Books SET ItemName='" + req.body.ItemName  +  "', ISBN13='" + req.body.ISBN13 + "', ISBN10='" + req.body.ISBN10 + 
+				"', AuthorId='" + req.body.AuthorId + "', PublisherId='" + req.body.PublisherId + "' WHERE ItemId= " + req.params.id;
 	console.log("Query:", query);
 	executeQuery (res, query);
 });
