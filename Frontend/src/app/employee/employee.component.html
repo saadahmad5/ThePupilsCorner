@@ -1,0 +1,32 @@
+<nav class="navbar navbar-expand-lg navbar-light" style="background-color: whitesmoke;">
+    <ul class="nav navbar-nav navbar-center container">
+        <li><a class="nav-link" [routerLink]="['/']"><img src='../assets/logo.png' height = '100' width = '100'  alt='logo'></a></li>
+    </ul>
+</nav> 
+
+<br>
+
+<p style="font-size: 36px; text-align: center;">
+    Who's here?
+</p>
+<p style="font-size: 24px; text-align: center;">
+    Choose your name from the drop-down below:
+    <br>
+    <br>
+    <img src="../../assets/login.png">
+</p>
+<br>
+
+<div style="text-align: center;">
+    <select style="width: 30%;">
+        <option>--</option>
+        <option *ngFor="let employee of employees" [value]="employee.PersonID">{{employee.FirstName}} {{employee.LastName}}</option>
+     </select>
+     <br>
+     <br>
+     <br>
+     <br>
+     <br>
+     <br>
+     <button type="button" class="btn btn-primary">Login</button>
+</div>

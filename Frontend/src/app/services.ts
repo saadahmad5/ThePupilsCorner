@@ -8,15 +8,31 @@ import { Observable} from 'rxjs';
 
 export class Services {
 
-    private payrollGroupUrl: string = 'http://localhost:8080/api/books';
-    Books: any;
+    private bookUrl: string = 'http://localhost:8080/api/book';
+    private supplyUrl: string = 'http://localhost:8080/api/supply';
+    private userUrl: string = 'http://localhost:8080/api/user';
+    private employeeUrl: string = 'http://localhost:8080/api/employee';
 
     constructor(private http: HttpClient) {
         
     }
 
-    public getPayrollGroups(): Observable<any[]> {
-        return this.http.get<any[]>(this.payrollGroupUrl);
+    public getBooks(): Observable<any[]> {
+        return this.http.get<any[]>(this.bookUrl);
     }
+
+    public getUsers(): Observable<any[]> {
+        return this.http.get<any[]>(this.userUrl);
+    }
+
+    public getEmployees(): Observable<any[]> {
+        return this.http.get<any[]>(this.employeeUrl);
+    }
+
+    public getSupplys(): Observable<any[]> {
+        return this.http.get<any[]>(this.supplyUrl);
+    }
+
+    
 
 }

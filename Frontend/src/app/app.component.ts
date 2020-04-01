@@ -18,12 +18,7 @@ export class AppComponent implements OnInit{
 
 
   ngOnInit(): void {
-    this.services.getPayrollGroups().subscribe(
-      {
-        next: books => this.books = books
-      }
-    );
-    console.log(this.books);
+    
   }
   title = 'The Pupils Corner';
 }

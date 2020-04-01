@@ -1,0 +1,73 @@
+<nav class="navbar navbar-expand-lg navbar-light" style="background-color: whitesmoke;">
+    <ul class="nav navbar-nav navbar-center container">
+        <li><a class="nav-link" [routerLink]="['/']"><img src='../assets/logo.png' height = '100' width = '100'  alt='logo'></a></li>
+    </ul>
+</nav> 
+
+<br>
+
+
+
+<p style="font-size: 36px; text-align: center;">
+    Welcome to The Pupils Corner!
+</p>
+<p style="font-size: 24px; text-align: center;">
+    Get started by choosing one of the category below:
+</p>
+<br>
+<div class="row">
+    <div class="col col-4">
+        <div [routerLink]="['/user']">
+            <div class="card">
+                <br>
+                <div class="cardcontainer text-center">
+                    <img src="../../assets/user.png" alt="User">
+                    <br>
+                    <br>
+                    <h4><b>User</b></h4>
+                    <p>Login as a User</p> 
+                </div>
+            </div>    
+        </div>
+    </div>
+    
+    <div class="col col-4">
+        <div [routerLink]="['/employee']">
+            <div class="card">
+                <br>
+                <div class="cardcontainer text-center">
+                    <img src="../../assets/employee.png" alt="Employee">
+                    <br>
+                    <br>
+                    <h4><b>Employee</b></h4> 
+                    <p>Login as an Employee</p> 
+                </div>
+            </div>
+          </div>
+    </div>
+    
+    <div class="col col-4">
+        <div class="card">
+            <br>
+            <div class="cardcontainer text-center">
+                <img src="../../assets/system.png" alt="System">
+                <br>
+                <br>
+                <h4><b>Administrator</b></h4> 
+                <p>System Manager</p> 
+            </div>
+          </div>
+    </div>  
+</div>
+<div class="container footer">
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        <strong><i class="fa fa-exclamation-circle"></i>&nbsp;COVID-19</strong> <br>
+            Due to the COVID-19 pandemic, The Pupils Corner will be closed through Sunday, April 5, 2020 due to public health concerns over the COVID-19 virus. 
+            The bookstore operations are being conducted remotely, so please be sure before coming to bookstore.
+            <hr>
+            For more information on COVID-19, please visit <a href="http://cdc.gov">http://cdc.gov</a>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+</div>

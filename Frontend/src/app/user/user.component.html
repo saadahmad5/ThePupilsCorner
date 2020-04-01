@@ -1,0 +1,55 @@
+<nav class="navbar navbar-expand-lg navbar-light" style="background-color: whitesmoke;">
+    <ul class="nav navbar-nav navbar-center container">
+        <li><a class="nav-link" [routerLink]="['/']"><img src='../assets/logo.png' height = '100' width = '100'  alt='logo'></a></li>
+    </ul>
+</nav> 
+
+<br>
+
+<p style="font-size: 36px; text-align: center;">
+    What do you want to look?
+</p>
+<p style="font-size: 24px; text-align: center;">
+    Choose either of the Books or Office supply to search for them:
+</p>
+<br>
+<div class="row">
+    <div class="col col-1">
+
+    </div>
+    <div class="col col-4">
+        <div [routerLink]="['/books']">
+            <div class="card">
+                <br>
+                <div class="cardcontainer text-center">
+                    <img src="../../assets/book.png" alt="Book">
+                    <br>
+                    <br>
+                    <h4><b>Books</b></h4>
+                    <p>Search books</p> 
+                </div>
+            </div>    
+        </div>
+    </div>
+    <div class="col col-2">
+
+    </div>
+    <div class="col col-4">
+        <div [routerLink]="['/supply']">
+            <div class="card">
+                <br>
+                <div class="cardcontainer text-center">
+                    <img src="../../assets/supply.png" alt="Supply">
+                    <br>
+                    <br>
+                    <h4><b>Office Supply</b></h4> 
+                    <p>Search office supply/ items</p> 
+                </div>
+              </div>
+        </div>
+    </div>
+    <div class="col col-1">
+
+    </div>
+</div>
+

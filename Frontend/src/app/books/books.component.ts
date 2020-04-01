@@ -14,9 +14,9 @@ export class BooksComponent implements OnInit {
   }
 
   books: any[];
-  
+  searchText;
   ngOnInit(): void {
-    this.services.getPayrollGroups().subscribe(
+    this.services.getBooks().subscribe(
       {
         next: books => this.books = books
       }

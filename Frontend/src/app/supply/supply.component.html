@@ -11,10 +11,10 @@
 </nav> 
 <br>
 <h3><a [routerLink]="['/user']" style="color: #68C2E8;"><i class="fa fa-arrow-left"></i></a>&nbsp;
-    Search Books</h3>
+    Search Office Supply</h3>
 <br>
 <div>
-    <input type="text" class="form-control search" [(ngModel)]="searchText" autocomplete="off"  placeholder="&#61442; Start searching by Book Name, Author, Publisher or ISBN">
+    <input type="text" class="form-control search" [(ngModel)]="searchText" autocomplete="off"  placeholder="&#61442; Start searching by Office Supply Name, or its Type">
 </div>
 
 <br>
@@ -23,20 +23,14 @@
         <tr>
             <th>Item Id</th> 
             <th>Item Name</th>
-            <th>ISBN-13</th>
-            <th>ISBN-10</th>
-            <th>Author</th>
-            <th>Publisher</th>
+            <th>Type</th>
             <th>Cost</th>
         </tr>
-        <tr *ngFor="let book of books | filter:searchText">
-            <td>{{book.ItemId}}</td>
-            <td>{{book.ItemName}}</td>
-            <td>{{book.ISBN13}}</td>
-            <td>{{book.ISBN10}}</td>
-            <td>{{book.FirstName}} {{book.LastName}}</td>
-            <td>{{book.Name}}</td>
-            <td>${{book.Cost}}</td>
+        <tr *ngFor="let supply of supplys | filter:searchText">
+            <td>{{supply.ItemID}}</td>
+            <td>{{supply.ItemName}}</td>
+            <td>{{supply.TypeName}}</td>
+            <td>${{supply.Cost}}</td>
         </tr>
     </table>
 </div>

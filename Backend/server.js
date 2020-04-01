@@ -50,10 +50,42 @@ app.get("/", function(req , res){
 	res.send('Saad');
 });
 
-app.get("/api/books", function(req , res){
-	var query = "SELECT * FROM Books";
+//GET API
+app.get("/api/book", function(req , res){
+	var query = `   SELECT b.ItemId, b.ItemName, b.ISBN10, b.ISBN13, a.FirstName, a.LastName, p.Name, b.Cost
+					FROM Book AS b, BookAuthor AS ba, Author AS a, BookPublisher AS bp, Publisher AS p
+					WHERE a.AuthorID = ba.AuthorID AND
+					b.ItemId = ba.ItemID AND
+					p.PublisherID = bp.PublisherID AND
+					bp.ItemID = b.ItemId					`;
 	executeQuery (res, query);
 });
+
+app.get("/api/supply", function(req , res){
+	if(req.body.ItemName)
+		var itemName = req.body.ItemName;
+	else
+		var itemName = "";
+	var query = `   SELECT os.ItemID, os.ItemName, os.Cost, st.TypeName
+					FROM OfficeSupply AS os, SupplyType AS st
+					WHERE os.OfficeSupplyTypeID = st.TypeID	AND
+					os.ItemName LIKE '%` + itemName + `%'		`;
+	//console.log("Query:", query);
+	executeQuery (res, query);
+});
+
+app.get("/api/user", function(req , res){
+	var query = `  	SELECT U.PersonID, U.FirstName, U.LastName
+					FROM [User] AS U					`;
+	executeQuery (res, query);
+});
+
+app.get("/api/employee", function(req , res){
+	var query = `  	SELECT  E.PersonID, E.FirstName, E.LastName
+					FROM Employee AS E				`;
+	executeQuery (res, query);
+});
+
 
 //POST API
  app.post("/api/books", function(req , res){
