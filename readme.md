@@ -1,5 +1,5 @@
 # Welcome to The Pupils Corner!
-This is a group project for CIS 421 - Database Systems by Dr. Raed Almomani at University of Michigan.
+This is a group project for CIS 421 - Database Systems, taught by Dr. Raed Almomani at University of Michigan.
 
 ## Getting Started
 I searched and figured out to create a RESTful backend for our Web Project, using ExpressJs as backend connected to SQL Server database. The frontend would be in Angular.
@@ -31,16 +31,17 @@ I searched and figured out to create a RESTful backend for our Web Project, usin
 - Type username as 'sa' and the password.
 - Connect
 9. On the left pane expand Databases and create a new database 'thepupilscorner'.
-10. Under this database, create a new table named Books and its attribs are (ItemId, ItemName, ISBN13, ISBN10)
-11. Open the VS Code in the './Backend/' folder
-12. Open server.js, modify the user and password in dbConfig variable
-13. Use the integrated terminal in VS Code and type 'npm start' in the prompt.
-14. Open Postman and try HTTP requests
-- GET: localhost:8080/api/books
-- POST: localhost:8080/api/books [Body: {ItemID: "", ... }]
-- PUT: localhost:8080/api/books/id
-- DELETE: Same as PUT
-15. So far I remember that followed the steps above to make it work, if it won't work for you, feel free to ask me.
+10. Under this database, use the DML.sql file to create tables in this database.
+11. Now use the DML.sql file to insert sample data to the database. Try some queries here!
+12. Open the VS Code in the './Backend/' folder
+13. Open server.js, modify the user and password in dbConfig variable
+14. Use the integrated terminal in VS Code and type 'npm start' in the prompt.
+15. You can open Postman and try HTTP requests
+- GET: localhost:8080/api/book
+- POST: localhost:8080/api/book [Body: {ItemName: "", ... }]
+- PUT: localhost:8080/api/book/{id} [Body: {ItemName: "", ...}]
+- DELETE: localhost:8080/api/book/{id}
+16. So far I remember that followed the steps above to make it work, if it won't work for you, feel free to ask me.
 
 ### STEPS FOR FRONTEND:
 1. Clone the code
@@ -48,7 +49,7 @@ I searched and figured out to create a RESTful backend for our Web Project, usin
 3. In the Integrated Terminal, enter 'npm install'
 4. After installation enter 'npm start' in the prompt
 5. Navigate to 'localhost:4200'
-6. So far, I just implemented GET HTTP request to load all books. Let me know if you have any questions for me. I'd be glad to help!
+6. Browse! Let me know if you have any questions for me. I'd be glad to help!
 
 # Screenshots
 
