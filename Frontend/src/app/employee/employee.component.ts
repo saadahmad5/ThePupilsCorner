@@ -13,8 +13,15 @@ export class EmployeeComponent implements OnInit {
     
   }
 
-
+  EmpID: number = 0;
   employees: any[];
+
+  sendEmpID(empID)
+  {
+    this.EmpID = empID;
+    this.services.getEmpId(this.EmpID);
+    this.router.navigate(['/employeeportal'],{skipLocationChange: true})
+  }
 
   ngOnInit(): void {
     this.services.getEmployees().subscribe(
@@ -22,7 +29,7 @@ export class EmployeeComponent implements OnInit {
         next: instance => this.employees = instance
       }
     );
-    console.log(this.employees);
+    
   }
 
 }

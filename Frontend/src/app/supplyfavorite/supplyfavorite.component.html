@@ -1,0 +1,59 @@
+<nav class="navbar navbar-expand-lg navbar-light" style="background-color: whitesmoke;">
+    <ul class="nav navbar-nav navbar-center container">
+        <li><a class="nav-link" [routerLink]="['/']"><img src='../assets/logo.png' height = '100' width = '100'  alt='logo'></a></li>
+        <li><a class="nav-link" [routerLink]="['/books']">BOOKS</a></li>
+        <li><a class="nav-link" [routerLink]="['/supply']">OFFICE SUPPLY</a></li>
+        <li><a class="nav-link" [routerLink]="['/supplyfavorite']">FAVORITE</a></li>
+        <li><a class="nav-link" href="">PURCHASE</a></li>
+        <li><a class="nav-link" href="">RENTAL</a></li>
+        <li><a class="nav-link" href="">HELP</a></li>
+    </ul>
+</nav> 
+<br>
+<h3><a [routerLink]="['/supply']" style="color: #68C2E8;"><i class="fa fa-arrow-left"></i></a>&nbsp;
+    Favorite a Supply</h3>
+<br>
+
+<form (ngSubmit)="markAsFavorite()">
+    <div class="jumbotron">
+        <div class="row">
+            <div class="col col-2">
+                <p class="lead">User</p>
+            </div>
+            <div class="col col-4">
+                <select class="form-control" [(ngModel)]="UserID" name="UserID">
+                    <option value="0" disabled selected>&lt;Choose a User&gt;</option>
+                    <option *ngFor="let user of users" [(ngValue)]="user.PersonID" >{{user.FirstName}} {{user.LastName}}</option>
+                 </select>
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col col-2">
+                <p class="lead">Supply</p>
+            </div>
+            <div class="col col-4">
+                <select class="form-control" [(ngModel)]="ItemID" name="ItemID">
+                    <option value="0" disabled selected>&lt;Choose a Supply&gt;</option>
+                    <option *ngFor="let supply of supplys" [(ngValue)]="supply.ItemId" >{{supply.ItemName}}</option>
+                 </select>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col text-right">
+                <button type="submit" class="btn btn-success" [disabled]="((ItemID == 0) || (UserID == 0))">
+                    <i class="fa fa-plus"></i>&nbsp;Add as Favorite
+                </button>
+                &nbsp;
+                <button type="button" class="btn btn-danger" [routerLink]="['/supply']">
+                    <i class="fa fa-arrow-left"></i>&nbsp;Cancel
+                </button>
+            </div>
+        </div>
+    </div>
+</form>
+
+
+
+
+

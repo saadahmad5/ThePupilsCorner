@@ -3,9 +3,8 @@
         <li><a class="nav-link" [routerLink]="['/']"><img src='../assets/logo.png' height = '100' width = '100'  alt='logo'></a></li>
         <li><a class="nav-link" [routerLink]="['/books']">BOOKS</a></li>
         <li><a class="nav-link" [routerLink]="['/supply']">OFFICE SUPPLY</a></li>
-        <li><a class="nav-link" href="">FAVORITE</a></li>
+        <li><a class="nav-link" [routerLink]="['/supplyfavorite']">FAVORITE</a></li>
         <li><a class="nav-link" href="">PURCHASE</a></li>
-        <li><a class="nav-link" href="">RENTAL</a></li>
         <li><a class="nav-link" href="">HELP</a></li>
     </ul>
 </nav> 
@@ -13,10 +12,14 @@
 <h3><a [routerLink]="['/user']" style="color: #68C2E8;"><i class="fa fa-arrow-left"></i></a>&nbsp;
     Search Office Supply</h3>
 <br>
-<div>
-    <input type="text" class="form-control search" [(ngModel)]="searchText" autocomplete="off"  placeholder="&#61442; Start searching by Office Supply Name, or its Type">
-</div>
 
+<div class="input-group mb-3">
+    <div class="input-group-prepend">
+      <span class="input-group-text" id="basic-addon1"><i class="fa fa-search"></i></span>
+    </div>
+    <input type="text" class="form-control search" [(ngModel)]="searchText" 
+           placeholder="Start searching by Office Supply Name, or its Type" autocomplete="off">
+  </div>
 <br>
 <div class="table-responsive">  
     <table class="table">
@@ -33,4 +36,13 @@
             <td>${{supply.Cost}}</td>
         </tr>
     </table>
+</div>
+<div>
+    <div class="row">
+        <div class="col text-center">
+            <button class="btn btn-primary" [routerLink]="['/supplyfavorite']">Favorites a Supply</button>
+            &nbsp;
+            <button class="btn btn-success" [routerLink]="['/supplypurchase']">Purchase a Supply</button>
+        </div>
+    </div>
 </div>

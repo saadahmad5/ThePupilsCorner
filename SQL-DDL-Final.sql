@@ -40,7 +40,7 @@ IF NOT EXISTS ( SELECT * FROM sysobjects WHERE NAME = 'Employee')
 
 IF NOT EXISTS ( SELECT * FROM sysobjects WHERE NAME = 'EmployeePhone')
 	CREATE TABLE EmployeePhone (
-		EmployeeID INT FOREIGN KEY REFERENCES Employee(PersonID),
+		EmployeeID INT FOREIGN KEY REFERENCES Employee(PersonID) ON DELETE CASCADE,
 		PhoneNumber VARCHAR(10),
 		)
 	GO

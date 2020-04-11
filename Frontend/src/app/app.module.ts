@@ -11,6 +11,12 @@ import { HomeComponent } from './home/home.component';
 import { UserComponent } from './user/user.component';
 import { SupplyComponent } from './supply/supply.component';
 import { EmployeeComponent } from './employee/employee.component';
+import { BookfavoriteComponent } from './bookfavorite/bookfavorite.component';
+import { EmployeeportalComponent } from './employeeportal/employeeportal.component';
+import { EmployeeportaleditComponent } from './employeeportaledit/employeeportaledit.component';
+import { EmployeeportaladdComponent } from './employeeportaladd/employeeportaladd.component';
+import { RecordsComponent } from './records/records.component';
+import { SupplyfavoriteComponent } from './supplyfavorite/supplyfavorite.component';
 
 let routes = [
   { path: 'home', component: HomeComponent },
@@ -18,6 +24,12 @@ let routes = [
   { path: 'employee', component: EmployeeComponent },
   { path: 'books', component: BooksComponent },
   { path: 'supply', component: SupplyComponent },
+  { path: 'bookfavorite', component: BookfavoriteComponent },
+  { path: 'supplyfavorite', component: SupplyfavoriteComponent },
+  { path: 'employeeportal', component: EmployeeportalComponent },
+  { path: 'employeeedit', component: EmployeeportaleditComponent },
+  { path: 'employeeadd', component: EmployeeportaladdComponent },
+  { path: 'records', component: RecordsComponent },
   { path: '', redirectTo: 'home', pathMatch: 'full'}
 ];
 
@@ -28,7 +40,13 @@ let routes = [
     HomeComponent,
     UserComponent,
     SupplyComponent,
-    EmployeeComponent
+    EmployeeComponent,
+    BookfavoriteComponent,
+    EmployeeportalComponent,
+    EmployeeportaleditComponent,
+    EmployeeportaladdComponent,
+    RecordsComponent,
+    SupplyfavoriteComponent
   ],
   imports: [
     BrowserModule,

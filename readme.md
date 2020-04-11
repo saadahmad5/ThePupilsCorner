@@ -1,5 +1,5 @@
 # Welcome to The Pupils Corner!
-This is a group project for CIS 421 - Database Systems by Dr. Raed Almomani at University of Michigan.
+This is a group project for CIS 421 - Database Systems, taught by Dr. Raed Almomani at University of Michigan.
 
 ## Getting Started
 I searched and figured out to create a RESTful backend for our Web Project, using ExpressJs as backend connected to SQL Server database. The frontend would be in Angular.
@@ -31,16 +31,17 @@ I searched and figured out to create a RESTful backend for our Web Project, usin
 - Type username as 'sa' and the password.
 - Connect
 9. On the left pane expand Databases and create a new database 'thepupilscorner'.
-10. Under this database, create a new table named Books and its attribs are (ItemId, ItemName, ISBN13, ISBN10)
-11. Open the VS Code in the './Backend/' folder
-12. Open server.js, modify the user and password in dbConfig variable
-13. Use the integrated terminal in VS Code and type 'npm start' in the prompt.
-14. Open Postman and try HTTP requests
-- GET: localhost:8080/api/books
-- POST: localhost:8080/api/books [Body: {ItemID: "", ... }]
-- PUT: localhost:8080/api/books/id
-- DELETE: Same as PUT
-15. So far I remember that followed the steps above to make it work, if it won't work for you, feel free to ask me.
+10. Under this database, use the DDL.sql file to create tables in this database.
+11. Now use the DML.sql file to insert sample data to the database. Try some queries here!
+12. Open the VS Code in the './Backend/' folder
+13. Open server.js, modify the user and password in dbConfig variable
+14. Use the integrated terminal in VS Code and type 'npm start' in the prompt.
+15. You can open Postman and try HTTP requests
+- GET: localhost:8080/api/book
+- POST: localhost:8080/api/book [Body: {ItemName: "", ... }]
+- PUT: localhost:8080/api/book/{id} [Body: {ItemName: "", ...}]
+- DELETE: localhost:8080/api/book/{id}
+16. So far I remember that followed the steps above to make it work, if it won't work for you, feel free to ask me.
 
 ### STEPS FOR FRONTEND:
 1. Clone the code
@@ -48,30 +49,53 @@ I searched and figured out to create a RESTful backend for our Web Project, usin
 3. In the Integrated Terminal, enter 'npm install'
 4. After installation enter 'npm start' in the prompt
 5. Navigate to 'localhost:4200'
-6. So far, I just implemented GET HTTP request to load all books. Let me know if you have any questions for me. I'd be glad to help!
+6. Browse! Let me know if you have any questions for me. I'd be glad to help!
 
 # Screenshots
 
-![Getting Started0](DML.jpg)
+ ![Getting Started0](DML.jpg)
  Sample Database Instance
 
-![Getting Started1](sc1.jpg)
+ ![Getting Started1](sc1.jpg)
  Home Page
 
-![Getting Started2](sc2.jpg)
+ ![Getting Started2](sc2.jpg)
  If you click on User from Home page, this page is displayed
 
-![Getting Started3](sc3.jpg)
- If you click on Books from User page, this page is displayed
-
-![Getting Started4](sc4.jpg)
+ ![Getting Started3](sc3.jpg)
+ If you click on Books from User page, this Book page is displayed
+ 
+ ![Getting Started5](sc5.jpg)
+ If you click on Favorite a Book from Book page, this page is displayed
+ 
+ ![Getting Started7](sc7.jpg)
  **DEMO** Search working for Book(s)
 
-![Getting Started5](sc5.jpg)
- If you click on Office Supply from User page, this page is displayed
+ ![Getting Started4](sc4.jpg)
+ If you click on Office Supply from User page, this Supply page is displayed
 
-![Getting Started6](sc6.jpg)
+ ![Getting Started6](sc6.jpg)
+ If you click on Favorite a Supply from Supply page, this page is displayed
+
+ ![Getting Started8](sc8.jpg)
  **DEMO** Search working for Office Supply(s)
+ 
+ ![Getting Started9](sc9.jpg)
+ If you click on Employees from Home page, this is Login Screen for Employees
 
-![Getting Started7](sc7.jpg)
- If you click on Employee from the Home page, this page is displayed
+ ![Getting Started10](sc10.jpg)
+ If you click on Add a Employee from Employee page, this form is displayed
+ 
+ ![Getting Started11](sc11.jpg)
+ If you log into as a EMPLOYEE, this page is displayed.
+ **NOTE** An employee cannot add another employee but can resign
+ 
+ ![Getting Started12](sc12.jpg)
+ If you log into as a MANAGER, this page is displayed.
+ **NOTE** A manager can add another employee and also can fire others
+ 
+ ![Getting Started10](sc13.jpg)
+ If you click on Edit from Employee View page, this form is displayed
+ 
+ ![Getting Started10](sc14.jpg)
+ If you click on Administrator from Home page, this report is displayed

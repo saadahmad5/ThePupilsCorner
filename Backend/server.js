@@ -7,7 +7,7 @@ app.use(bodyParser.json());
 
 app.use(function (req, res, next) {
     res.header("Access-Control-Allow-Origin", "*");
-    res.header("Access-Control-Allow-Methods", "GET,HEAD,OPTIONS,POST,PUT");
+    res.header("Access-Control-Allow-Methods", "GET,HEAD,OPTIONS,POST,PUT,DELETE");
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, contentType,Content-Type, Accept, Authorization");
     next();
 });
@@ -51,6 +51,9 @@ app.get("/", function(req , res){
 });
 
 //GET API
+
+////////////////////////////////////////////////////////////////////////////////////////
+// To populate the tables for search engine
 app.get("/api/book", function(req , res){
 	var query = `   SELECT b.ItemId, b.ItemName, b.ISBN10, b.ISBN13, a.FirstName, a.LastName, p.Name, b.Cost
 					FROM Book AS b, BookAuthor AS ba, Author AS a, BookPublisher AS bp, Publisher AS p
@@ -61,18 +64,17 @@ app.get("/api/book", function(req , res){
 	executeQuery (res, query);
 });
 
+
 app.get("/api/supply", function(req , res){
-	if(req.body.ItemName)
-		var itemName = req.body.ItemName;
-	else
-		var itemName = "";
 	var query = `   SELECT os.ItemID, os.ItemName, os.Cost, st.TypeName
 					FROM OfficeSupply AS os, SupplyType AS st
-					WHERE os.OfficeSupplyTypeID = st.TypeID	AND
-					os.ItemName LIKE '%` + itemName + `%'		`;
+					WHERE os.OfficeSupplyTypeID = st.TypeID		`;
 	//console.log("Query:", query);
 	executeQuery (res, query);
 });
+
+////////////////////////////////////////////////////////////////////////////////////////
+// To populate the drop downs in Book/Supply Favorites. Can be reused for Rental/ Purchase
 
 app.get("/api/user", function(req , res){
 	var query = `  	SELECT U.PersonID, U.FirstName, U.LastName
@@ -80,31 +82,164 @@ app.get("/api/user", function(req , res){
 	executeQuery (res, query);
 });
 
+////////////////////////////////////////////////////////////////////////////////////////
+// To populate the drop downs in Login page for employees
+
 app.get("/api/employee", function(req , res){
 	var query = `  	SELECT  E.PersonID, E.FirstName, E.LastName
-					FROM Employee AS E				`;
+					FROM Employee AS E		`;
+	executeQuery (res, query);
+});
+
+//////////////////////////////////////////////////////////////////////////////////////////
+// For Phone numbers in employee portal
+
+app.get("/api/employeephone/:id", function(req , res){
+	var id = req.params.id;
+	var query = `  	SELECT PersonID, PhoneNumber
+					FROM Employee AS e, EmployeePhone AS ep
+					WHERE e.PersonID = ep.EmployeeID AND ep.EmployeeID = ` + id;
+	//console.log(query);
+	executeQuery (res, query);
+});
+
+////////////////////////////////////////////////////////////////////////////////////////
+// For employee portal view page
+
+app.get("/api/employee/:id", function(req , res){
+	var id = req.params.id;
+	var query = `  	SELECT E.PersonID, E.FirstName, E.LastName, E.Email, E.SSN, E.Street, E.City, E.State, E.Country, E.JobTypeID, J.JobTypeName
+					FROM Employee AS E, JobType AS J
+					WHERE E.JobTypeID = J.JobTypeID AND E.PersonID = ` + id;
+	//console.log(query);
+	executeQuery (res, query);
+});
+
+////////////////////////////////////////////////////////////////////////////////////////
+// To populate the drop downs in Book/Supply Favorites. Can be reused for Rental/ Purchase
+app.get("/api/books", function(req , res){
+	var query = `   SELECT b.ItemId, b.ItemName
+					FROM Book AS b					`;
+	executeQuery (res, query);
+});
+
+app.get("/api/supplys", function(req , res){
+	var query = `   SELECT os.ItemId, os.ItemName
+					FROM OfficeSupply AS os					`;
 	executeQuery (res, query);
 });
 
 
+/////////////////////////////////////////////////////////////////////////////////////////
+// FOR Admin Reports
+app.get("/api/bookfavorite", function(req , res){
+	var query = `  	    SELECT U.FirstName, U.LastName, B.ItemName
+						FROM Book AS B, [User] AS U, BookFavorite AS BF
+						WHERE B.ItemId = BF.ItemID AND U.PersonID = BF.UserID		`;
+	executeQuery (res, query);
+});
+
+app.get("/api/bookrental", function(req , res){
+	var query = `  	    SELECT U.FirstName, U.LastName, B.ItemName
+						FROM Book AS B, [User] AS U, BookRental AS BR
+						WHERE B.ItemId = BR.ItemID AND U.PersonID = BR.UserID		`;
+	executeQuery (res, query);
+});
+
+app.get("/api/bookpurchase", function(req , res){
+	var query = `  	    SELECT U.FirstName, U.LastName, B.ItemName
+						FROM Book AS B, [User] AS U, BookPurchase AS BP
+						WHERE B.ItemId = BP.ItemID AND U.PersonID = BP.UserID		  `;
+	executeQuery (res, query);
+});
+
+app.get("/api/supplyfavorite", function(req , res){
+	var query = `  	    SELECT U.FirstName, U.LastName, S.ItemName
+						FROM OfficeSupply AS S, [User] AS U, OfficeSupplyFavorite AS SF
+						WHERE S.ItemId = SF.ItemID AND U.PersonID = SF.UserID		`;
+	executeQuery (res, query);
+});
+
+app.get("/api/supplypurchase", function(req , res){
+	var query = `  	    SELECT U.FirstName, U.LastName, S.ItemName
+						FROM OfficeSupply AS S, [User] AS U, OfficeSupplyPurchase AS SP
+						WHERE S.ItemId = SP.ItemID AND U.PersonID = SP.UserID		  `;
+	executeQuery (res, query);
+});
+/////////////////////////////////////////////////////////////////////////////////////////////
 //POST API
- app.post("/api/books", function(req , res){
+/* app.post("/api/books", function(req , res){
 	var query = "INSERT INTO Books VALUES ( " + req.body.ItemID + ", '" + req.body.ItemName + "', '" +  req.body.ISBN13 + "', '"  + req.body.ISBN10 + "')";
+	console.log("Query:", query);
+	executeQuery (res, query);
+});*/
+
+////////////////////////////////////////////////////////////////////////////////////////
+// To add employee and add items to favorite. Needs addition of similar methods for rental/ purchase of items
+
+app.post("/api/bookfavorite", function(req , res){
+	var query = "INSERT INTO BookFavorite VALUES ( " + req.body.ItemID + ", " + req.body.PersonID + ")";
+	console.log("Query:", query);
+	executeQuery (res, query);
+});
+
+app.post("/api/supplyfavorite", function(req , res){
+	var query = "INSERT INTO OfficeSupplyFavorite VALUES ( " + req.body.ItemID + ", " + req.body.PersonID + ")";
+	console.log("Query:", query);
+	executeQuery (res, query);
+});
+
+app.post("/api/employee", function(req , res){
+	var query = "INSERT INTO Employee VALUES ( '" + req.body.FirstName + "', '" + req.body.LastName + "', '" + req.body.Email + "', '" + req.body.SSN +
+				"', 0, '" + req.body.Street + "', '" + req.body.City + "', '" + req.body.State + "', '" + req.body.Country + "', " + req.body.JobTypeID +")";
 	console.log("Query:", query);
 	executeQuery (res, query);
 });
 
 //PUT API
- app.put("/api/books/:id", function(req , res){
+ /*app.put("/api/books/:id", function(req , res){
 	var query = "UPDATE Books SET ItemName='" + req.body.ItemName  +  "', ISBN13='" + req.body.ISBN13 + "', ISBN10='" + req.body.ISBN10 + 
 				"', AuthorId='" + req.body.AuthorId + "', PublisherId='" + req.body.PublisherId + "' WHERE ItemId= " + req.params.id;
+	console.log("Query:", query);
+	executeQuery (res, query);
+});*/
+
+////////////////////////////////////////////////////////////////////////////////////////
+// To edit employee
+
+app.put("/api/employee/:id", function(req , res){
+	var query = "UPDATE Employee SET FirstName='" + req.body.FirstName  +  "', LastName='" + req.body.LastName + "', Email='" + req.body.Email + 
+				"', SSN='" + req.body.SSN + "', Street='" + req.body.Street + "', City='" + req.body.City + "', State='" + req.body.State + 
+				"', Country='"+ req.body.Country + "', JobTypeID=" + req.body.JobTypeID + " WHERE PersonId= " + req.params.id;
 	console.log("Query:", query);
 	executeQuery (res, query);
 });
 
 // DELETE API
- app.delete("/api/books/:id", function(req , res){
+ /*app.delete("/api/books/:id", function(req , res){
 	var query = "DELETE FROM Books WHERE ItemId=" + req.params.id;
 	console.log("Query:", query);
 	executeQuery (res, query);
+});*/
+
+////////////////////////////////////////////////////////////////////////////////////////
+// To fire or resign employee
+
+app.delete("/api/employee/:id", function(req , res){
+	var query = "DELETE FROM Employee WHERE PersonId=" + req.params.id;
+	console.log("Query:", query);
+	executeQuery (res, query);
 });
+
+app.delete("/api/clearrecords", function(req , res){
+	var query = `	
+	DELETE FROM BookFavorite;
+	DELETE FROM BookRental;
+	DELETE FROM BookPurchase;
+	DELETE FROM OfficeSupplyPurchase;
+	DELETE FROM OfficeSupplyFavorite;`;
+	console.log("Query:", query);
+	executeQuery (res, query);
+});
+
+

@@ -1,14 +1,8 @@
 
  
-  .form-control {
+  .search {
     box-shadow: 2px 5px 8px 0 lightgray;
     border-radius: 5px 5px 5px 5px;
     padding: 16px;
     height: 36px;
-  }
-  .form-control::placeholder  {
-    font-family: FontAwesome;
-  }
-  .search {
-    font-family: 'Segoe UI';
   }

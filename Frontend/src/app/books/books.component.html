@@ -3,7 +3,7 @@
         <li><a class="nav-link" [routerLink]="['/']"><img src='../assets/logo.png' height = '100' width = '100'  alt='logo'></a></li>
         <li><a class="nav-link" [routerLink]="['/books']">BOOKS</a></li>
         <li><a class="nav-link" [routerLink]="['/supply']">OFFICE SUPPLY</a></li>
-        <li><a class="nav-link" href="">FAVORITE</a></li>
+        <li><a class="nav-link" [routerLink]="['/bookfavorite']">FAVORITE</a></li>
         <li><a class="nav-link" href="">PURCHASE</a></li>
         <li><a class="nav-link" href="">RENTAL</a></li>
         <li><a class="nav-link" href="">HELP</a></li>
@@ -13,9 +13,14 @@
 <h3><a [routerLink]="['/user']" style="color: #68C2E8;"><i class="fa fa-arrow-left"></i></a>&nbsp;
     Search Books</h3>
 <br>
-<div>
-    <input type="text" class="form-control search" [(ngModel)]="searchText" autocomplete="off"  placeholder="&#61442; Start searching by Book Name, Author, Publisher or ISBN">
-</div>
+
+<div class="input-group mb-3">
+    <div class="input-group-prepend">
+      <span class="input-group-text" id="basic-addon1"><i class="fa fa-search"></i></span>
+    </div>
+    <input type="text" class="form-control search" [(ngModel)]="searchText" 
+           placeholder="Start searching by Book Name, Author, Publisher or ISBN" autocomplete="off">
+  </div>
 
 <br>
 <div class="table-responsive">  
@@ -39,4 +44,17 @@
             <td>${{book.Cost}}</td>
         </tr>
     </table>
+    <hr>
+</div>
+<br>
+<div>
+    <div class="row">
+        <div class="col text-center">
+            <button class="btn btn-primary" [routerLink]="['/bookfavorite']">Favorite a Book</button>
+            &nbsp;
+            <button class="btn btn-info" [routerLink]="['/bookrental']">Rent a Book</button>
+            &nbsp;
+            <button class="btn btn-success" [routerLink]="['/bookpurchase']">Purchase a Book</button>
+        </div>
+    </div>
 </div>

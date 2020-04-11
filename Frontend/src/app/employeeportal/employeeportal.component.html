@@ -1,0 +1,88 @@
+<nav class="navbar navbar-expand-lg navbar-light" style="background-color: whitesmoke;">
+    <ul class="nav navbar-nav navbar-center container">
+        <li><a class="nav-link" [routerLink]="['/']"><img src='../assets/logo.png' height = '100' width = '100'  alt='logo'></a></li>
+        <li><a class="nav-link" href="">BOOKS</a></li>
+        <li><a class="nav-link" href="">SUPPLY</a></li>
+        <li><a class="nav-link" href="">AUTHORS</a></li>
+        <li><a class="nav-link" href="">PUBLISHERS</a></li>
+        <li><a class="nav-link" href="">CUSTOMERS</a></li>
+    </ul>
+</nav> 
+<br>
+<h3><a [routerLink]="['/employee']" style="color: #68C2E8;"><i class="fa fa-arrow-left"></i></a>&nbsp;
+    Welcome, {{employee[0].FirstName}}</h3>
+<br>
+<div class="jumbotron">
+    <div class="row">
+        <div class="col col-6">
+            <legend>Full Name:</legend>
+            <p>{{employee[0].FirstName}} {{employee[0].LastName}}</p>
+        </div>
+        <div class="col col-6">
+            <legend>Street:</legend>
+            <p>{{employee[0].Street}}</p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col col-6">
+            <legend>Email:</legend>
+            <p>{{employee[0].Email}}</p>
+        </div>
+        <div class="col col-6">
+            <legend>City:</legend>
+            <p>{{employee[0].City}}</p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col col-6">
+            <legend>SSN:</legend>
+            <p>{{employee[0].SSN}}</p>
+        </div>
+        <div class="col col-6">
+            <legend>State:</legend>
+            <p>{{employee[0].State}}</p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col col-6">
+            <legend>Role:</legend>
+            <p>{{employee[0].JobTypeName}}</p>
+        </div>
+        <div class="col col-6">
+            <legend>Country:</legend>
+            <p>{{employee[0].Country}}</p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col col-6">
+            <legend>Phone:</legend>
+            <p *ngFor="let phone of phonenumbers">{{phone.PhoneNumber}}</p>
+        </div>
+    </div>
+    <hr>
+    <div align="left">
+        <button class="btn btn-success" [routerLink]="['/employeeadd']" *ngIf="(employee[0].JobTypeName == 'Manager')"><i class="fa fa-user-plus"></i>&nbsp;Add</button>
+        <button class="btn btn-warning" [routerLink]="['/employeeedit']"><i class="fa fa-edit"></i>&nbsp;Edit</button>
+        <button style="float: right;" class="btn btn-danger" (click)="resign(employee[0].PersonID)" *ngIf="(employee[0].JobTypeName != 'Manager')"><i class="fa fa-remove"></i>&nbsp;Resign</button>
+        <div *ngIf="(employee[0].JobTypeName == 'Manager')" style="float: right;" class="btn-group" role="group">
+            <button id="btnGroupDrop1" type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="fa fa-fire"></i>&nbsp;Fire...
+            </button>
+            <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+              <a class="dropdown-item" (click)="fire(emp.PersonID)" *ngFor="let emp of employees">{{emp.FirstName}} {{emp.LastName}}</a>
+            </div>
+        </div>
+    </div>
+    
+</div>
+<div class="text-center">
+    <button class="btn btn-primary">Manage Books</button>
+
+    <button class="btn btn-primary">Manage Supply</button>
+
+    <button class="btn btn-primary">Manage Authors</button>
+ 
+    <button class="btn btn-primary">Manage Publishers</button>
+
+    <button class="btn btn-primary">Manage Customers</button>
+</div>

@@ -1,0 +1,67 @@
+<nav class="navbar navbar-expand-lg navbar-light" style="background-color: whitesmoke;">
+    <ul class="nav navbar-nav navbar-center container">
+        <li><a class="nav-link" [routerLink]="['/']"><img src='../assets/logo.png' height = '100' width = '100'  alt='logo'></a></li>
+    </ul>
+</nav> 
+<br>
+<h3><a [routerLink]="['/employee']" style="color: #68C2E8;"><i class="fa fa-arrow-left"></i></a>&nbsp;
+    Add Employee</h3>
+<br>
+<form (ngSubmit)="AddEmployee(employee)">
+<div class="jumbotron">
+    <div class="row">
+        <div class="col col-6">
+            <legend>Full Name:</legend>
+            <div class="row">
+                <div class="col col-6">
+                    <input type="text" class="form-control" [(ngModel)]="employee.FirstName" name="FirstName" placeholder="First" />
+                </div>
+                <div class="col col-6">
+                    <input type="text" class="form-control" [(ngModel)]="employee.LastName" name="LastName" placeholder="Last"  />
+                </div>            
+            </div>               
+        </div>
+        <div class="col col-6">
+            <legend>Street:</legend>
+            <input class="form-control" type="text" [(ngModel)]="employee.Street" name="Street" placeholder="Street" />
+        </div>
+    </div>
+    <div class="row">
+        <div class="col col-6">
+            <legend>Email:</legend>
+            <input class="form-control" type="text" [(ngModel)]="employee.Email" name="Email" placeholder="Email" />
+        </div>
+        <div class="col col-6">
+            <legend>City:</legend>
+            <input class="form-control" type="text" [(ngModel)]="employee.City" name="City" placeholder="City" />
+        </div>
+    </div>
+    <div class="row">
+        <div class="col col-6">
+            <legend>SSN:</legend>
+            <input class="form-control" type="text" [(ngModel)]="employee.SSN" name="SSN" placeholder="SSN" />
+        </div>
+        <div class="col col-6">
+            <legend>State:</legend>
+            <input class="form-control" type="text" [(ngModel)]="employee.State" name="State" placeholder="State" />
+        </div>
+    </div>
+    <div class="row">
+        <div class="col col-6">
+            <legend>Role:</legend>
+            <select class="form-control" [(ngModel)]="employee.JobTypeID" name="JobTypeID">
+                <option value=1>Employee</option>
+                <option value=2>Manager</option>
+             </select>
+        </div>
+        <div class="col col-6">
+            <legend>Country:</legend>
+            <input class="form-control" type="text" [(ngModel)]="employee.Country" name="Country" placeholder="Country" />
+        </div>
+    </div>
+    <hr>
+    <div align="left">
+        <button type="submit" class="btn btn-success"><i class="fa fa-save"></i>&nbsp;Add</button>
+    </div>
+</div>
+</form>

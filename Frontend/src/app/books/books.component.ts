@@ -21,7 +21,7 @@ export class BooksComponent implements OnInit {
         next: books => this.books = books
       }
     );
-    console.log(this.books);
+    
   }
 
 }
