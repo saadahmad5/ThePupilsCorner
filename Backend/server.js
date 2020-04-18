@@ -55,12 +55,17 @@ app.get("/", function(req , res){
 ////////////////////////////////////////////////////////////////////////////////////////
 // To populate the tables for search engine
 app.get("/api/book", function(req , res){
-	var query = `   SELECT b.ItemId, b.ItemName, b.ISBN10, b.ISBN13, a.FirstName, a.LastName, p.Name, b.Cost
-					FROM Book AS b, BookAuthor AS ba, Author AS a, BookPublisher AS bp, Publisher AS p
-					WHERE a.AuthorID = ba.AuthorID AND
-					b.ItemId = ba.ItemID AND
+	var query = `   SELECT DISTINCT b2.ItemId, b2.ItemName, b2.ISBN10, b2.ISBN13,
+							STUFF((SELECT ', ' + CONCAT(FirstName, ' ', LastName)
+							FROM Author a1, BookAuthor ba1, Book b1
+							WHERE A1.AuthorID = ba1.AuthorID AND b1.ItemId = ba1.ItemID AND b1.ItemID = b2.ItemID
+							FOR XML PATH('')), 1, 1, '') AS 'Author',
+							p.[Name], b2.Cost
+				FROM Book AS b2, BookAuthor AS ba2, Author AS a2, Publisher as p, BookPublisher AS bp
+				WHERE	b2.ItemId = ba2.ItemID AND 
+					ba2.AuthorID = a2.AuthorID AND 
 					p.PublisherID = bp.PublisherID AND
-					bp.ItemID = b.ItemId					`;
+					bp.ItemID = b2.ItemId					`;
 	executeQuery (res, query);
 });
 
