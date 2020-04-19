@@ -3,7 +3,7 @@
         <li><a class="nav-link" [routerLink]="['/']"><img src='../assets/logo.png' height = '100' width = '100'  alt='logo'></a></li>
         <li><a class="nav-link" href="">BOOKS</a></li>
         <li><a class="nav-link" href="">SUPPLY</a></li>
-        <li><a class="nav-link" href="">AUTHORS</a></li>
+        <li><a class="nav-link" [routerLink]="['/authorview']">AUTHORS</a></li>
         <li><a class="nav-link" href="">PUBLISHERS</a></li>
         <li><a class="nav-link" href="">CUSTOMERS</a></li>
     </ul>
@@ -80,7 +80,7 @@
 
     <button class="btn btn-primary">Manage Supply</button>
 
-    <button class="btn btn-primary">Manage Authors</button>
+    <button class="btn btn-primary" [routerLink]="['/authorview']" >Manage Authors</button>
  
     <button class="btn btn-primary">Manage Publishers</button>
 

@@ -23,8 +23,10 @@ export class Services {
     private supplyfavorite: string = 'http://localhost:8080/api/supplyfavorite';
     private supplypurchase: string = 'http://localhost:8080/api/supplypurchase';
     private clearrecords: string = 'http://localhost:8080/api/clearrecords';
+    private authorUrl: string = 'http://localhost:8080/api/author'
 
     private EmpId: number = 0;
+    private AuthorId: number = 0;
 
     constructor(private http: HttpClient) {
         
@@ -34,8 +36,16 @@ export class Services {
         this.EmpId = EmpId;
     }
 
+    public getAuthorId(authorId) {
+        this.AuthorId = authorId;
+    }
+
     public getBooks(): Observable<any[]> {
         return this.http.get<any[]>(this.bookUrl);
+    }
+
+    public getAuthors(): Observable<any[]> {
+        return this.http.get<any[]>(this.authorUrl);
     }
 
     public getBooksName(): Observable<any[]> {
@@ -48,6 +58,10 @@ export class Services {
 
     public getEmployee(): Observable<any> {
         return this.http.get<any>(this.employeeUrl + '/' + this.EmpId);
+    }
+
+    public getAuthor(): Observable<any> {
+        return this.http.get<any>(this.authorUrl + '/' + this.AuthorId);
     }
 
     public getEmployees(): Observable<any[]> {
@@ -86,6 +100,10 @@ export class Services {
         return this.http.get<any[]>(this.supplypurchase);
     }
 
+    public postAuthor(Object: any): Observable<any> {
+        return this.http.post<any>(this.authorUrl, Object);
+    }
+
     public postBookFavorite(Object: any): Observable<any>{
         return this.http.post<any>(this.bookfavoriteUrl, Object);
     }
@@ -102,8 +120,16 @@ export class Services {
         return this.http.put<any>(this.employeeUrl + '/' + Object.PersonID, Object);
     }
 
+    public putAuthor(Object: any): Observable<any>{
+        return this.http.put<any>(this.authorUrl + '/' + Object.AuthorID, Object);
+    }
+
     public deleteEmployee(EmpId): Observable<any>{
         return this.http.delete<any>(this.employeeUrl + '/' + EmpId);
+    }
+
+    public deleteAuthor(AuthorID): Observable<any> {
+        return this.http.delete<any>(this.authorUrl + '/' + AuthorID);
     }
 
     public clearRecords(): Observable<any>{

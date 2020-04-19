@@ -78,6 +78,15 @@ app.get("/api/supply", function(req , res){
 	executeQuery (res, query);
 });
 
+app.get("/api/author", function(req , res){
+	var query = `   SELECT [AuthorID]
+						,[FirstName]
+						,[LastName]
+					FROM [Author]		`;
+	console.log("Query:", query);
+	executeQuery (res, query);
+});
+
 ////////////////////////////////////////////////////////////////////////////////////////
 // To populate the drop downs in Book/Supply Favorites. Can be reused for Rental/ Purchase
 
@@ -119,6 +128,19 @@ app.get("/api/employee/:id", function(req , res){
 	//console.log(query);
 	executeQuery (res, query);
 });
+
+app.get("/api/author/:id", function(req , res){
+	var id = req.params.id;
+	var query = `  	SELECT AuthorID
+							,FirstName
+							,LastName
+							FROM [Author]
+							WHERE AuthorID = ` + id;
+	//console.log(query);
+	executeQuery (res, query);
+});
+
+
 
 ////////////////////////////////////////////////////////////////////////////////////////
 // To populate the drop downs in Book/Supply Favorites. Can be reused for Rental/ Purchase
@@ -201,6 +223,13 @@ app.post("/api/employee", function(req , res){
 	executeQuery (res, query);
 });
 
+app.post("/api/author", function(req , res){
+	var query = "INSERT INTO Author VALUES ( '" + req.body.FirstName + "', '" + req.body.LastName + "')";
+	console.log("Query:", query);
+	executeQuery (res, query);
+});
+
+
 //PUT API
  /*app.put("/api/books/:id", function(req , res){
 	var query = "UPDATE Books SET ItemName='" + req.body.ItemName  +  "', ISBN13='" + req.body.ISBN13 + "', ISBN10='" + req.body.ISBN10 + 
@@ -220,6 +249,12 @@ app.put("/api/employee/:id", function(req , res){
 	executeQuery (res, query);
 });
 
+app.put("/api/author/:id", function(req , res){
+	var query = "UPDATE Author SET FirstName='" + req.body.FirstName  +  "', LastName='" + req.body.LastName + "' WHERE AuthorID= " + req.params.id;
+	console.log("Query:", query);
+	executeQuery (res, query);
+});
+
 // DELETE API
  /*app.delete("/api/books/:id", function(req , res){
 	var query = "DELETE FROM Books WHERE ItemId=" + req.params.id;
@@ -229,6 +264,12 @@ app.put("/api/employee/:id", function(req , res){
 
 ////////////////////////////////////////////////////////////////////////////////////////
 // To fire or resign employee
+
+app.delete("/api/author/:id", function(req , res){
+	var query = "DELETE FROM Author WHERE Author.AuthorID =" + req.params.id;
+	console.log("Query:", query);
+	executeQuery (res, query);
+});
 
 app.delete("/api/employee/:id", function(req , res){
 	var query = "DELETE FROM Employee WHERE PersonId=" + req.params.id;

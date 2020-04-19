@@ -1,0 +1,30 @@
+<nav class="navbar navbar-expand-lg navbar-light" style="background-color: whitesmoke;">
+    <ul class="nav navbar-nav navbar-center container">
+        <li><a class="nav-link" [routerLink]="['/']"><img src='../assets/logo.png' height = '100' width = '100'  alt='logo'></a></li>
+        <li><a class="nav-link" href="">BOOKS</a></li>
+        <li><a class="nav-link" href="">SUPPLY</a></li>
+        <li><a class="nav-link" [routerLink]="['/authorview']">AUTHORS</a></li>
+        <li><a class="nav-link" href="">PUBLISHERS</a></li>
+        <li><a class="nav-link" href="">CUSTOMERS</a></li>
+    </ul>
+</nav> 
+<br>
+<br>
+<h3><a [routerLink]="['/employee']" style="color: #68C2E8;"><i class="fa fa-arrow-left"></i></a>&nbsp;
+    Authors</h3>
+<br>
+
+<div class="table-responsive">
+    <table class="table">
+        <tr>
+            <th>Author ID</th>
+            <th>AuthorName</th>
+        </tr>
+        <tr *ngFor="let author of authors">
+            <td>{{author.AuthorID}}</td>
+            <td><button class="btn btn-link" (click)="sendAuthorID(author.AuthorID)">{{author.FirstName}} {{author.LastName}}</button></td>
+        </tr>
+    </table>
+</div>
+<br>
+<button type="button" class="btn btn-primary" [routerLink]="['/authoradd']"><i class="fa fa-plus"></i>&nbsp;Add Author</button>

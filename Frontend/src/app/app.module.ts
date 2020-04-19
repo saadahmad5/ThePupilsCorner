@@ -17,6 +17,9 @@ import { EmployeeportaleditComponent } from './employeeportaledit/employeeportal
 import { EmployeeportaladdComponent } from './employeeportaladd/employeeportaladd.component';
 import { RecordsComponent } from './records/records.component';
 import { SupplyfavoriteComponent } from './supplyfavorite/supplyfavorite.component';
+import { AuthorviewComponent } from './authorview/authorview.component';
+import { AuthoraddComponent } from './authoradd/authoradd.component';
+import { AuthoreditComponent } from './authoredit/authoredit.component';
 
 let routes = [
   { path: 'home', component: HomeComponent },
@@ -30,6 +33,9 @@ let routes = [
   { path: 'employeeedit', component: EmployeeportaleditComponent },
   { path: 'employeeadd', component: EmployeeportaladdComponent },
   { path: 'records', component: RecordsComponent },
+  { path: 'authorview', component: AuthorviewComponent },
+  { path: 'authoradd', component: AuthoraddComponent },
+  { path: 'authoredit', component: AuthoreditComponent },
   { path: '', redirectTo: 'home', pathMatch: 'full'}
 ];
 
@@ -46,7 +52,10 @@ let routes = [
     EmployeeportaleditComponent,
     EmployeeportaladdComponent,
     RecordsComponent,
-    SupplyfavoriteComponent
+    SupplyfavoriteComponent,
+    AuthorviewComponent,
+    AuthoraddComponent,
+    AuthoreditComponent
   ],
   imports: [
     BrowserModule,

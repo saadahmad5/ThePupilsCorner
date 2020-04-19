@@ -1,0 +1,45 @@
+<nav class="navbar navbar-expand-lg navbar-light" style="background-color: whitesmoke;">
+    <ul class="nav navbar-nav navbar-center container">
+        <li><a class="nav-link" [routerLink]="['/']"><img src='../assets/logo.png' height = '100' width = '100'  alt='logo'></a></li>
+        <li><a class="nav-link" href="">BOOKS</a></li>
+        <li><a class="nav-link" href="">SUPPLY</a></li>
+        <li><a class="nav-link" [routerLink]="['/authorview']">AUTHORS</a></li>
+        <li><a class="nav-link" href="">PUBLISHERS</a></li>
+        <li><a class="nav-link" href="">CUSTOMERS</a></li>
+    </ul>
+</nav> 
+<br>
+<br>
+<h3><a [routerLink]="['/authorview']" style="color: #68C2E8;"><i class="fa fa-arrow-left"></i></a>&nbsp;
+    Edit Author</h3>
+<br>
+
+<form (ngSubmit)="EditAuthor(author[0])">
+    <div class="jumbotron">
+        <div class="row">
+            <div class="col col-6">
+                <legend>Full Name:</legend>
+                <div class="row">
+                    <div class="col col-6">
+                        <input type="text" class="form-control" [(ngModel)]="author[0].FirstName" name="FirstName" placeholder="First Name" />
+                    </div>
+                    <div class="col col-6">
+                        <input type="text" class="form-control" [(ngModel)]="author[0].LastName" name="LastName" placeholder="Last Name"  />
+                    </div>           
+                </div>               
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <button class="btn btn-warning" ><i class="fa fa-save"></i>&nbsp; Update</button>
+            </div>
+            <div class="col" >
+                <div class="text-right">
+                    <button type="button" class="btn btn-danger" (click)="DeleteAuthor(author[0].AuthorID)" ><i class="fa fa-trash"></i>&nbsp; Delete</button>
+                </div>
+            </div>
+        </div>
+        
+
+    </div>
+</form>
