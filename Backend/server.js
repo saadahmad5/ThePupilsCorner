@@ -87,6 +87,19 @@ app.get("/api/author", function(req , res){
 	executeQuery (res, query);
 });
 
+app.get("/api/publisher", function(req, res){
+	var query = `SELECT PublisherID, 
+						Name, 
+						Street, 
+						City, 
+						State, 
+						Country, 
+						PhoneNumber
+				FROM [ThePupilsCorner].[dbo].[Publisher]`;
+	console.log("Query: ", query);
+	executeQuery(res, query);
+})
+
 ////////////////////////////////////////////////////////////////////////////////////////
 // To populate the drop downs in Book/Supply Favorites. Can be reused for Rental/ Purchase
 
@@ -140,6 +153,21 @@ app.get("/api/author/:id", function(req , res){
 	executeQuery (res, query);
 });
 
+
+app.get("/api/publisher/:id", function(req , res){
+	var id = req.params.id;
+	var query = `  	SELECT PublisherID,
+							Name, 
+							Street, 
+							City, 
+							State, 
+							Country, 
+							PhoneNumber
+							FROM [Publisher]
+							WHERE PublisherID = ` + id;
+	//console.log(query);
+	executeQuery (res, query);
+});
 
 
 ////////////////////////////////////////////////////////////////////////////////////////
@@ -229,6 +257,11 @@ app.post("/api/author", function(req , res){
 	executeQuery (res, query);
 });
 
+app.post("/api/publisher", function(req, res){
+	var query = "INSERT INTO Publisher Values ('" + req.body.Name + "', '" + req.body.Street + "', '" + req.body.City + "', '" + req.body.State + "', '" + req.body.Country +"', '" + req.body.PhoneNumber + "')";
+	console.log("Query: ", query);
+	executeQuery(res, query);
+});
 
 //PUT API
  /*app.put("/api/books/:id", function(req , res){
@@ -255,6 +288,18 @@ app.put("/api/author/:id", function(req , res){
 	executeQuery (res, query);
 });
 
+app.put("/api/publisher/:id", function(req , res){
+	var query = "UPDATE Publisher SET Name='" + req.body.Name  +  
+								"', Street ='" + req.body.Street + 
+								"', City = '" + req.body.City +
+								"', State = '" + req.body.State +
+								"', Country = '" + req.body.Country +
+								"', PhoneNumber = '" + req.body.PhoneNumber +
+								"' WHERE PublisherID = " + req.params.id;
+	console.log("Query:", query);
+	executeQuery (res, query);
+});
+
 // DELETE API
  /*app.delete("/api/books/:id", function(req , res){
 	var query = "DELETE FROM Books WHERE ItemId=" + req.params.id;
@@ -269,6 +314,12 @@ app.delete("/api/author/:id", function(req , res){
 	var query = "DELETE FROM Author WHERE Author.AuthorID =" + req.params.id;
 	console.log("Query:", query);
 	executeQuery (res, query);
+});
+
+app.delete("/api/publisher/:id", function(req, res){
+	var query = "DELETE FROM Publisher WHERE Publisher.PublisherID =" + req.params.id;
+	console.log("Query:", query);
+	executeQuery(res, query);
 });
 
 app.delete("/api/employee/:id", function(req , res){

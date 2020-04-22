@@ -1,0 +1,51 @@
+<nav class="navbar navbar-expand-lg navbar-light" style="background-color: whitesmoke;">
+    <ul class="nav navbar-nav navbar-center container">
+        <li><a class="nav-link" [routerLink]="['/']"><img src='../assets/logo.png' height = '100' width = '100'  alt='logo'></a></li>
+        <li><a class="nav-link" href="">BOOKS</a></li>
+        <li><a class="nav-link" href="">SUPPLY</a></li>
+        <li><a class="nav-link" [routerLink]="['/authorview']">AUTHORS</a></li>
+        <li><a class="nav-link" [routerLink]="['/publisherview']">PUBLISHERS</a></li>
+        <li><a class="nav-link" href="">CUSTOMERS</a></li>
+    </ul>
+</nav> 
+<br>
+<br>
+<h3><a [routerLink]="['/publisherview']" style="color: #68C2E8;"><i class="fa fa-arrow-left"></i></a>&nbsp;
+    Add Publisher</h3>
+<br>
+<form (ngSubmit)="AddPublisher(publisher)">
+    <div class="jumbotron">
+        <div class="row">
+            <div class="col col-6">
+                <legend>Name:</legend>
+                <div class="row">
+                    <div class="col col-6">
+                        <input type="text" class="form-control" [(ngModel)]="publisher.Name" name="Name" placeholder="Name" />
+                    </div>         
+                </div>               
+                <legend>Address:</legend>
+                <div class="row">
+                    <div class="col col-6">
+                        <input type="text" class="form-control" [(ngModel)]="publisher.Street" name="Street" placeholder="Street" />
+                    </div>
+                    <div class="col col-6">
+                        <input type="text" class="form-control" [(ngModel)]="publisher.City" name="City" placeholder="City"  />
+                    </div>    
+                    <div class="col col-6">
+                        <input type="text" class="form-control" [(ngModel)]="publisher.State" name="State" placeholder="State"  />
+                    </div>     
+                    <div class="col col-6">
+                        <input type="text" class="form-control" [(ngModel)]="publisher.Country" name="Country" placeholder="Country"  />
+                    </div>             
+                </div>  
+                <legend>Phone Number:</legend> 
+                <div class="row">
+                    <div class="col col-6">
+                        <input type="text" class="form-control" [(ngModel)]="publisher.PhoneNumber" name="PhoneNumber" placeholder="Phone #" />
+                    </div>
+                </div>
+            </div>
+        </div>
+        <button class="btn btn-success" type="submit"><i class="fa fa-save"></i>&nbsp; Add</button>
+    </div>
+    </form>
