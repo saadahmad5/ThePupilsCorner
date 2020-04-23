@@ -11,20 +11,27 @@
 <br>
 <br>
 <h3><a [routerLink]="['/employee']" style="color: #68C2E8;"><i class="fa fa-arrow-left"></i></a>&nbsp;
-    Authors</h3>
+    Publishers</h3>
 <br>
-
 <div class="table-responsive">
     <table class="table">
         <tr>
-            <th>Author ID</th>
-            <th>AuthorName</th>
+            <th>Publisher Name</th>
+            <th>Street</th>
+            <th>City</th>
+            <th>State</th>
+            <th>Country</th>
+            <th>Phone Number</th>
         </tr>
-        <tr *ngFor="let author of authors">
-            <td>{{author.AuthorID}}</td>
-            <td><button class="btn btn-link" (click)="sendAuthorID(author.AuthorID)">{{author.FirstName}} {{author.LastName}}</button></td>
+        <tr *ngFor="let publisher of publishers">
+            <td><button class="btn btn-link" (click)="sendPublisherID(publisher.PublisherID)">{{publisher.Name}}</button></td>
+            <td>{{publisher.Street}}</td>
+            <td>{{publisher.City}}</td>
+            <td>{{publisher.State}}</td>
+            <td>{{publisher.Country}}</td>
+            <td>{{publisher.PhoneNumber}}</td>
         </tr>
     </table>
 </div>
 <br>
-<button type="button" class="btn btn-primary" [routerLink]="['/authoradd']"><i class="fa fa-plus"></i>&nbsp;Add Author</button>
+<button type="button" class="btn btn-primary" [routerLink]="['/publisheradd']"><i class="fa fa-plus"></i>&nbsp;Add Publisher</button>

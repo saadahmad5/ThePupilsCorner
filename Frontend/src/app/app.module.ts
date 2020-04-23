@@ -20,6 +20,9 @@ import { SupplyfavoriteComponent } from './supplyfavorite/supplyfavorite.compone
 import { AuthorviewComponent } from './authorview/authorview.component';
 import { AuthoraddComponent } from './authoradd/authoradd.component';
 import { AuthoreditComponent } from './authoredit/authoredit.component';
+import { PublisherviewComponent } from './publisherview/publisherview.component';
+import { PublisheraddComponent } from './publisheradd/publisheradd.component';
+import { PublishereditComponent } from './publisheredit/publisheredit.component';
 
 let routes = [
   { path: 'home', component: HomeComponent },
@@ -36,6 +39,9 @@ let routes = [
   { path: 'authorview', component: AuthorviewComponent },
   { path: 'authoradd', component: AuthoraddComponent },
   { path: 'authoredit', component: AuthoreditComponent },
+  { path: 'publisherview', component: PublisherviewComponent },
+  { path: 'publisheradd', component: PublisheraddComponent },
+  { path: 'publisheredit', component: PublishereditComponent },
   { path: '', redirectTo: 'home', pathMatch: 'full'}
 ];
 
@@ -55,7 +61,10 @@ let routes = [
     SupplyfavoriteComponent,
     AuthorviewComponent,
     AuthoraddComponent,
-    AuthoreditComponent
+    AuthoreditComponent,
+    PublisherviewComponent,
+    PublisheraddComponent,
+    PublishereditComponent
   ],
   imports: [
     BrowserModule,
