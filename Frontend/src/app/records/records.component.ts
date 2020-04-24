@@ -18,6 +18,7 @@ export class RecordsComponent implements OnInit {
   public ClearRecords() {
     this.services.clearRecords().subscribe();
     window.alert("System-wide records cleared");
+    this.router.navigateByUrl('/home')
   }
 
   constructor(private services: Services, private router: Router) {

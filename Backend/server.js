@@ -66,6 +66,7 @@ app.get("/api/book", function(req , res){
 					ba2.AuthorID = a2.AuthorID AND 
 					p.PublisherID = bp.PublisherID AND
 					bp.ItemID = b2.ItemId					`;
+	console.log("Query:", query);
 	executeQuery (res, query);
 });
 
@@ -74,7 +75,7 @@ app.get("/api/supply", function(req , res){
 	var query = `   SELECT os.ItemID, os.ItemName, os.Cost, st.TypeName
 					FROM OfficeSupply AS os, SupplyType AS st
 					WHERE os.OfficeSupplyTypeID = st.TypeID		`;
-	//console.log("Query:", query);
+	console.log("Query:", query);
 	executeQuery (res, query);
 });
 
@@ -106,6 +107,7 @@ app.get("/api/publisher", function(req, res){
 app.get("/api/user", function(req , res){
 	var query = `  	SELECT U.PersonID, U.FirstName, U.LastName
 					FROM [User] AS U					`;
+	console.log("Query:", query);
 	executeQuery (res, query);
 });
 
@@ -115,6 +117,7 @@ app.get("/api/user", function(req , res){
 app.get("/api/employee", function(req , res){
 	var query = `  	SELECT  E.PersonID, E.FirstName, E.LastName
 					FROM Employee AS E		`;
+	console.log("Query:", query);
 	executeQuery (res, query);
 });
 
@@ -126,7 +129,7 @@ app.get("/api/employeephone/:id", function(req , res){
 	var query = `  	SELECT PersonID, PhoneNumber
 					FROM Employee AS e, EmployeePhone AS ep
 					WHERE e.PersonID = ep.EmployeeID AND ep.EmployeeID = ` + id;
-	//console.log(query);
+	console.log(query);
 	executeQuery (res, query);
 });
 
@@ -138,7 +141,7 @@ app.get("/api/employee/:id", function(req , res){
 	var query = `  	SELECT E.PersonID, E.FirstName, E.LastName, E.Email, E.SSN, E.Street, E.City, E.State, E.Country, E.JobTypeID, J.JobTypeName
 					FROM Employee AS E, JobType AS J
 					WHERE E.JobTypeID = J.JobTypeID AND E.PersonID = ` + id;
-	//console.log(query);
+	console.log(query);
 	executeQuery (res, query);
 });
 
@@ -149,7 +152,7 @@ app.get("/api/author/:id", function(req , res){
 							,LastName
 							FROM [Author]
 							WHERE AuthorID = ` + id;
-	//console.log(query);
+	console.log(query);
 	executeQuery (res, query);
 });
 
@@ -165,7 +168,7 @@ app.get("/api/publisher/:id", function(req , res){
 							PhoneNumber
 							FROM [Publisher]
 							WHERE PublisherID = ` + id;
-	//console.log(query);
+	console.log(query);
 	executeQuery (res, query);
 });
 
@@ -175,12 +178,14 @@ app.get("/api/publisher/:id", function(req , res){
 app.get("/api/books", function(req , res){
 	var query = `   SELECT b.ItemId, b.ItemName
 					FROM Book AS b					`;
+	console.log("Query:", query);
 	executeQuery (res, query);
 });
 
 app.get("/api/supplys", function(req , res){
 	var query = `   SELECT os.ItemId, os.ItemName
 					FROM OfficeSupply AS os					`;
+	console.log("Query:", query);
 	executeQuery (res, query);
 });
 
@@ -191,6 +196,7 @@ app.get("/api/bookfavorite", function(req , res){
 	var query = `  	    SELECT U.FirstName, U.LastName, B.ItemName
 						FROM Book AS B, [User] AS U, BookFavorite AS BF
 						WHERE B.ItemId = BF.ItemID AND U.PersonID = BF.UserID		`;
+	console.log("Query:", query);
 	executeQuery (res, query);
 });
 
@@ -198,6 +204,7 @@ app.get("/api/bookrental", function(req , res){
 	var query = `  	    SELECT U.FirstName, U.LastName, B.ItemName
 						FROM Book AS B, [User] AS U, BookRental AS BR
 						WHERE B.ItemId = BR.ItemID AND U.PersonID = BR.UserID		`;
+	console.log("Query:", query);
 	executeQuery (res, query);
 });
 
@@ -205,6 +212,7 @@ app.get("/api/bookpurchase", function(req , res){
 	var query = `  	    SELECT U.FirstName, U.LastName, B.ItemName
 						FROM Book AS B, [User] AS U, BookPurchase AS BP
 						WHERE B.ItemId = BP.ItemID AND U.PersonID = BP.UserID		  `;
+	console.log("Query:", query);
 	executeQuery (res, query);
 });
 
@@ -212,6 +220,7 @@ app.get("/api/supplyfavorite", function(req , res){
 	var query = `  	    SELECT U.FirstName, U.LastName, S.ItemName
 						FROM OfficeSupply AS S, [User] AS U, OfficeSupplyFavorite AS SF
 						WHERE S.ItemId = SF.ItemID AND U.PersonID = SF.UserID		`;
+	console.log("Query:", query);
 	executeQuery (res, query);
 });
 
@@ -219,6 +228,7 @@ app.get("/api/supplypurchase", function(req , res){
 	var query = `  	    SELECT U.FirstName, U.LastName, S.ItemName
 						FROM OfficeSupply AS S, [User] AS U, OfficeSupplyPurchase AS SP
 						WHERE S.ItemId = SP.ItemID AND U.PersonID = SP.UserID		  `;
+	console.log("Query:", query);
 	executeQuery (res, query);
 });
 /////////////////////////////////////////////////////////////////////////////////////////////
@@ -238,8 +248,26 @@ app.post("/api/bookfavorite", function(req , res){
 	executeQuery (res, query);
 });
 
+app.post("/api/bookrental", function(req , res){
+	var query = "INSERT INTO BookRental VALUES ( " + req.body.ItemID + ", " + req.body.PersonID + ", '" + req.body.Date + "')";
+	console.log("Query:", query);
+	executeQuery (res, query);
+});
+
+app.post("/api/bookpurchase", function(req , res){
+	var query = "INSERT INTO BookPurchase VALUES ( " + req.body.ItemID + ", " + req.body.PersonID + ", '" + req.body.Date + "')";
+	console.log("Query:", query);
+	executeQuery (res, query);
+});
+
 app.post("/api/supplyfavorite", function(req , res){
-	var query = "INSERT INTO OfficeSupplyFavorite VALUES ( " + req.body.ItemID + ", " + req.body.PersonID + ")";
+	var query = "INSERT INTO OfficeSupplyFavorite VALUES ( " + req.body.ItemID + ", '" + req.body.PersonID + "')";
+	console.log("Query:", query);
+	executeQuery (res, query);
+});
+
+app.post("/api/supplypurchase", function(req , res){
+	var query = "INSERT INTO OfficeSupplyPurchase VALUES ( " + req.body.ItemID + ", " + req.body.PersonID + ", ' " + req.body.Date + "' )";
 	console.log("Query:", query);
 	executeQuery (res, query);
 });

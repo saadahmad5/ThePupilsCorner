@@ -23,6 +23,9 @@ import { AuthoreditComponent } from './authoredit/authoredit.component';
 import { PublisherviewComponent } from './publisherview/publisherview.component';
 import { PublisheraddComponent } from './publisheradd/publisheradd.component';
 import { PublishereditComponent } from './publisheredit/publisheredit.component';
+import { BookrentComponent } from './bookrent/bookrent.component';
+import { BookpurchaseComponent } from './bookpurchase/bookpurchase.component';
+import { SupplypurchaseComponent } from './supplypurchase/supplypurchase.component';
 
 let routes = [
   { path: 'home', component: HomeComponent },
@@ -31,7 +34,10 @@ let routes = [
   { path: 'books', component: BooksComponent },
   { path: 'supply', component: SupplyComponent },
   { path: 'bookfavorite', component: BookfavoriteComponent },
+  { path: 'bookrental', component: BookrentComponent },
+  { path: 'bookpurchase', component: BookpurchaseComponent },
   { path: 'supplyfavorite', component: SupplyfavoriteComponent },
+  { path: 'supplypurchase', component: SupplypurchaseComponent },
   { path: 'employeeportal', component: EmployeeportalComponent },
   { path: 'employeeedit', component: EmployeeportaleditComponent },
   { path: 'employeeadd', component: EmployeeportaladdComponent },
@@ -64,7 +70,10 @@ let routes = [
     AuthoreditComponent,
     PublisherviewComponent,
     PublisheraddComponent,
-    PublishereditComponent
+    PublishereditComponent,
+    BookrentComponent,
+    BookpurchaseComponent,
+    SupplypurchaseComponent
   ],
   imports: [
     BrowserModule,
