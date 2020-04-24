@@ -1,0 +1,63 @@
+<nav class="navbar navbar-expand-lg navbar-light" style="background-color: whitesmoke;">
+    <ul class="nav navbar-nav navbar-center container">
+        <li><a class="nav-link" [routerLink]="['/']"><img src='../assets/logo.png' height = '100' width = '100'  alt='logo'></a></li>
+        <li><a class="nav-link" [routerLink]="['/bookview']">BOOKS</a></li>
+        <li><a class="nav-link" [routerLink]="['/supplyview']">SUPPLY</a></li>
+        <li><a class="nav-link" [routerLink]="['/authorview']">AUTHORS</a></li>
+        <li><a class="nav-link" [routerLink]="['/publisherview']">PUBLISHERS</a></li>
+        <li><a class="nav-link" href="">CUSTOMERS</a></li>
+    </ul>
+</nav> 
+<br>
+<br>
+<h3><a [routerLink]="['/supplyview']" style="color: #68C2E8;"><i class="fa fa-arrow-left"></i></a>&nbsp;
+    Add Office Supply</h3>
+<br>
+
+<form (ngSubmit)="AddSupply(supply)">
+    <div class="jumbotron">
+        <div class="row">
+            <div class="col col-6">
+                <legend>Name:</legend>
+                <div class="row">
+                    <div class="col col-6">
+                        <input type="text" class="form-control" [(ngModel)]="supply.ItemName" name="ItemName" placeholder="Name" />
+                    </div>         
+                </div>               
+            </div>
+        </div>
+        <div class="row">
+            <div class="col col-6">
+                <legend>Cost:</legend>
+                <div class="row">
+                    <div class="col col-6">
+                        <input type="text" class="form-control" [(ngModel)]="supply.Cost" name="Cost" placeholder="Street" />
+                    </div>         
+                </div>                 
+            </div>
+        </div>
+        <div class="row">
+            <div class="col col-6">
+                <legend>Quantity</legend>
+                <div class="row">
+                    <div class="col col-6">
+                        <input type="text" class="form-control" [(ngModel)]="supply.Quantity" name="Quantity" placeholder="PhoneNumber" />
+                    </div>         
+                </div>               
+            </div>
+        </div>
+        <div class="row">
+            <div class="col col-4">
+                <legend>Type</legend>
+            </div>
+            <div class="col col-6">
+                <select class="form-control" [(ngModel)]="officeTypeID" name="officeTypeID">
+                    <option value="0" disabled>&lt;Choose a Type&gt;</option>
+                    <option *ngFor="let type of officesupplyTypes" [(ngValue)]="type.TypeID" >{{type.TypeName}}</option>
+                 </select>
+            </div>
+        </div>
+        <button class="btn btn-success" type="submit"><i class="fa fa-save"></i>&nbsp; Add</button>
+
+    </div>
+</form>

@@ -23,6 +23,12 @@ import { AuthoreditComponent } from './authoredit/authoredit.component';
 import { PublisherviewComponent } from './publisherview/publisherview.component';
 import { PublisheraddComponent } from './publisheradd/publisheradd.component';
 import { PublishereditComponent } from './publisheredit/publisheredit.component';
+import { BookviewComponent } from './bookview/bookview.component';
+import { BookaddComponent } from './bookadd/bookadd.component';
+import { BookeditComponent } from './bookedit/bookedit.component';
+import { SupplyviewComponent } from './supplyview/supplyview.component';
+import { SupplyaddComponent } from './supplyadd/supplyadd.component';
+import { SupplyeditComponent } from './supplyedit/supplyedit.component';
 
 let routes = [
   { path: 'home', component: HomeComponent },
@@ -42,6 +48,12 @@ let routes = [
   { path: 'publisherview', component: PublisherviewComponent },
   { path: 'publisheradd', component: PublisheraddComponent },
   { path: 'publisheredit', component: PublishereditComponent },
+  { path: 'bookview', component: BookviewComponent },
+  { path: 'bookadd', component: BookaddComponent },
+  { path: 'bookedit', component: BookeditComponent },
+  { path: 'supplyview', component: SupplyviewComponent },
+  { path: 'supplyadd', component: SupplyaddComponent },
+  { path: 'supplyedit', component: SupplyeditComponent },
   { path: '', redirectTo: 'home', pathMatch: 'full'}
 ];
 
@@ -64,7 +76,13 @@ let routes = [
     AuthoreditComponent,
     PublisherviewComponent,
     PublisheraddComponent,
-    PublishereditComponent
+    PublishereditComponent,
+    BookviewComponent,
+    BookaddComponent,
+    BookeditComponent,
+    SupplyviewComponent,
+    SupplyaddComponent,
+    SupplyeditComponent
   ],
   imports: [
     BrowserModule,

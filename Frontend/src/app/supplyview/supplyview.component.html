@@ -1,0 +1,34 @@
+<nav class="navbar navbar-expand-lg navbar-light" style="background-color: whitesmoke;">
+    <ul class="nav navbar-nav navbar-center container">
+        <li><a class="nav-link" [routerLink]="['/']"><img src='../assets/logo.png' height = '100' width = '100'  alt='logo'></a></li>
+        <li><a class="nav-link" [routerLink]="['/bookview']">BOOKS</a></li>
+        <li><a class="nav-link" [routerLink]="['/supplyview']">SUPPLY</a></li>
+        <li><a class="nav-link" [routerLink]="['/authorview']">AUTHORS</a></li>
+        <li><a class="nav-link" [routerLink]="['/publisherview']">PUBLISHERS</a></li>
+        <li><a class="nav-link" href="">CUSTOMERS</a></li>
+    </ul>
+</nav> 
+<br>
+<br>
+<h3><a [routerLink]="['/employee']" style="color: #68C2E8;"><i class="fa fa-arrow-left"></i></a>&nbsp;
+    Office Supply</h3>
+<br>
+
+<div class="table-responsive">
+    <table class="table">
+        <tr>
+            <th>Office Supply Name</th>
+            <th>Cost</th>
+            <th>Quantity</th>
+            <th>Type</th>
+        </tr>
+        <tr *ngFor="let supply of supplies">
+            <td><button class="btn btn-link" (click)="sendOfficeSupplyID(supply.ItemID)">{{supply.ItemName}}</button></td>
+            <td>${{supply.Cost}}</td>
+            <td>{{supply.Quantity}}</td>
+            <td>{{supply.TypeName}}</td>
+        </tr>
+    </table>
+</div>
+<br>
+<button type="button" class="btn btn-primary" [routerLink]="['/supplyadd']"><i class="fa fa-plus"></i>&nbsp;Add Supply</button>

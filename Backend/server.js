@@ -60,7 +60,7 @@ app.get("/api/book", function(req , res){
 							FROM Author a1, BookAuthor ba1, Book b1
 							WHERE A1.AuthorID = ba1.AuthorID AND b1.ItemId = ba1.ItemID AND b1.ItemID = b2.ItemID
 							FOR XML PATH('')), 1, 1, '') AS 'Author',
-							p.[Name], b2.Cost
+							p.[Name], b2.Cost, b2.Quantity
 				FROM Book AS b2, BookAuthor AS ba2, Author AS a2, Publisher as p, BookPublisher AS bp
 				WHERE	b2.ItemId = ba2.ItemID AND 
 					ba2.AuthorID = a2.AuthorID AND 
@@ -71,7 +71,7 @@ app.get("/api/book", function(req , res){
 
 
 app.get("/api/supply", function(req , res){
-	var query = `   SELECT os.ItemID, os.ItemName, os.Cost, st.TypeName
+	var query = `   SELECT os.ItemID, os.ItemName, os.Cost, os.Quantity, st.TypeID, st.TypeName
 					FROM OfficeSupply AS os, SupplyType AS st
 					WHERE os.OfficeSupplyTypeID = st.TypeID		`;
 	//console.log("Query:", query);
@@ -169,7 +169,49 @@ app.get("/api/publisher/:id", function(req , res){
 	executeQuery (res, query);
 });
 
+app.get("/api/book/:id", function(req , res){
+	var id = req.params.id;
+	var query = `SELECT ItemName,
+						b.ItemId,
+						Cost,
+						Quantity,
+						ISBN13,
+						ISBN10,
+						bp.PublisherID,
+						bp.Date
+						FROM [Book] b, [BookPublisher] bp
+						WHERE b.ItemId = ` + id + ` AND b.ItemId = bp.ItemID`;
+	console.log(query);
+	executeQuery (res, query);
+});
 
+app.get("/api/addedbook/:itemName", function(req , res){
+	var itemName = req.params.itemName;
+	var query = `  	SELECT ItemName,
+							ItemId,
+							Cost,
+							Quantity,
+							ISBN13,
+							ISBN10
+							FROM [Book]
+							WHERE ItemName = '` + itemName + `'`;
+	console.log(query);
+	executeQuery (res, query);
+});
+
+app.get("/api/bookauthor/:id", function(req, res){
+	var id = req.params.id;
+	var query = `SELECT b.AuthorID,
+						b.BookAuthorID, 
+						FirstName,
+						LastName,
+						ItemID
+				FROM [BookAuthor] b, [Author] a
+				WHERE b.ItemID =` + id + ` AND b.AuthorID = a.AuthorID`;
+	console.log(query);
+	executeQuery (res, query);
+
+});
 ////////////////////////////////////////////////////////////////////////////////////////
 // To populate the drop downs in Book/Supply Favorites. Can be reused for Rental/ Purchase
 app.get("/api/books", function(req , res){
@@ -221,6 +263,22 @@ app.get("/api/supplypurchase", function(req , res){
 						WHERE S.ItemId = SP.ItemID AND U.PersonID = SP.UserID		  `;
 	executeQuery (res, query);
 });
+
+app.get("/api/supplytypes", function(req , res){
+	var query = `		SELECT [TypeID]
+								,[TypeName]
+						FROM [ThePupilsCorner].[dbo].[SupplyType] `;
+	executeQuery (res, query);
+});
+
+
+app.get("/api/supply/:id", function(req , res){
+	var query = `   SELECT os.ItemID, os.ItemName, os.Cost, os.Quantity, st.TypeID, st.TypeName
+					FROM OfficeSupply AS os, SupplyType AS st
+					WHERE os.OfficeSupplyTypeID = st.TypeID	AND os.ItemID = ` + req.params.id;
+	//console.log("Query:", query);
+	executeQuery (res, query);
+});
 /////////////////////////////////////////////////////////////////////////////////////////////
 //POST API
 /* app.post("/api/books", function(req , res){
@@ -263,14 +321,36 @@ app.post("/api/publisher", function(req, res){
 	executeQuery(res, query);
 });
 
-//PUT API
- /*app.put("/api/books/:id", function(req , res){
-	var query = "UPDATE Books SET ItemName='" + req.body.ItemName  +  "', ISBN13='" + req.body.ISBN13 + "', ISBN10='" + req.body.ISBN10 + 
-				"', AuthorId='" + req.body.AuthorId + "', PublisherId='" + req.body.PublisherId + "' WHERE ItemId= " + req.params.id;
-	console.log("Query:", query);
-	executeQuery (res, query);
-});*/
+app.post("/api/book", function(req, res){
+	var query1 = "INSERT INTO Book Values ('" + req.body.ItemName + "', '" + req.body.Cost + "', '" + req.body.Quantity + "', '" + req.body.ISBN13 + "', '" + req.body.ISBN10 + "')";
+	console.log("Query: ", query1);
+	executeQuery(res, query1);
+});
 
+app.post("/api/bookpublisher", function(req, res){
+	var query = "INSERT INTO BookPublisher Values (" + req.body.PublisherID + "," + req.body.ItemID + ", '"+ req.body.DatePublished + "')";
+	console.log("Query: ", query);
+	executeQuery(res, query);
+});
+
+app.post("/api/bookauthor", function(req, res){
+	//now we must add the authors of the book by looping through the array to get the ID's 
+	var query= "INSERT INTO BookAuthor Values (" + req.body.authorID_being_processed + "," + req.body.ItemID + ")"; 
+	console.log("Query: ", query);
+	executeQuery(res, query);
+
+});
+
+app.post("/api/supply", function(req, res){
+	//now we must add the authors of the book by looping through the array to get the ID's 
+	var query= "INSERT INTO OfficeSupply Values ('" + req.body.ItemName + "', " +
+													 req.body.Cost + ", " + 
+													 req.body.Quantity + ", " +
+													 req.body.TypeID +")"; 
+	console.log("Query: ", query);
+	executeQuery(res, query);
+
+});
 ////////////////////////////////////////////////////////////////////////////////////////
 // To edit employee
 
@@ -300,6 +380,43 @@ app.put("/api/publisher/:id", function(req , res){
 	executeQuery (res, query);
 });
 
+ app.put("/api/book/:id", function(req , res){
+	var query = "UPDATE Book SET ItemName='" + req.body.ItemName +
+							  "', Cost='" + req.body.Cost +
+							  "', Quantity='" + req.body.Quantity + 
+							"', ISBN13='" + req.body.ISBN13 + 
+							"', ISBN10='" + req.body.ISBN10 + 
+							"' WHERE ItemId= " + req.params.id;
+	console.log("Query:", query);
+	executeQuery (res, query);
+});
+
+app.put("/api/bookauthor/:id", function(req , res){
+	var query = "UPDATE BookAuthor " + 
+				"SET AuthorID = " + req.body.authorID_being_processed + 
+				" WHERE BookAuthorID = " + req.body.bookAuthorID;
+	console.log("Query:", query);
+	executeQuery (res, query);
+});
+
+app.put("/api/bookpublisher/:id", function(req , res){
+	var query = "UPDATE BookPublisher " + 
+				"SET PublisherID = " + req.body.PublisherID + 
+				", Date = '" + req.body.DatePublished +
+				"' WHERE ItemID = " + req.params.id;
+	console.log("Query:", query);
+	executeQuery (res, query);
+});
+
+app.put("/api/supply/:id", function(req , res){
+	var query = "UPDATE OfficeSupply SET ItemName = '" + req.body.ItemName +
+									"', Cost = " + req.body.Cost + 
+									", Quantity = " + req.body.Quantity +
+									", OfficeSupplyTypeID = " + req.body.TypeID +
+									" WHERE ItemID = " + req.params.id;
+	console.log("Query:", query);
+	executeQuery (res, query);
+});
 // DELETE API
  /*app.delete("/api/books/:id", function(req , res){
 	var query = "DELETE FROM Books WHERE ItemId=" + req.params.id;
@@ -322,8 +439,32 @@ app.delete("/api/publisher/:id", function(req, res){
 	executeQuery(res, query);
 });
 
+app.delete("/api/book/:id", function(req, res){
+	var query = "DELETE FROM Book WHERE Book.ItemId =" + req.params.id;
+	console.log("Query:", query);
+	executeQuery(res, query);
+});
+
+app.delete("/api/bookpublisher/:id", function(req, res){
+	var query = "DELETE FROM BookPublisher WHERE BookPublisher.ItemID =" + req.params.id;
+	console.log("Query:", query);
+	executeQuery(res, query);
+});
+
+app.delete("/api/bookauthor/:id", function(req, res){
+	var query = "DELETE FROM BookAuthor WHERE BookAuthor.ItemID =" + req.params.id;
+	console.log("Query:", query);
+	executeQuery(res, query);
+});
+
 app.delete("/api/employee/:id", function(req , res){
 	var query = "DELETE FROM Employee WHERE PersonId=" + req.params.id;
+	console.log("Query:", query);
+	executeQuery (res, query);
+});
+
+app.delete("/api/supply/:id", function(req, res){
+	var query = "DELETE FROM OfficeSupply WHERE ItemID = " + req.params.id;
 	console.log("Query:", query);
 	executeQuery (res, query);
 });

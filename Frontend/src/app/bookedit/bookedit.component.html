@@ -1,0 +1,109 @@
+<nav class="navbar navbar-expand-lg navbar-light" style="background-color: whitesmoke;">
+    <ul class="nav navbar-nav navbar-center container">
+        <li><a class="nav-link" [routerLink]="['/']"><img src='../assets/logo.png' height = '100' width = '100'  alt='logo'></a></li>
+        <li><a class="nav-link" [routerLink]="['/bookview']">BOOKS</a></li>
+        <li><a class="nav-link" [routerLink]="['/supplyview']">SUPPLY</a></li>
+        <li><a class="nav-link" [routerLink]="['/authorview']">AUTHORS</a></li>
+        <li><a class="nav-link" [routerLink]="['/publisherview']">PUBLISHERS</a></li>
+    </ul>
+</nav> 
+<br>
+<br>
+<h3><a [routerLink]="['/bookview']" style="color: #68C2E8;"><i class="fa fa-arrow-left"></i></a>&nbsp;
+    Edit Book</h3>
+<br>
+
+<form (ngSubmit)="EditBook(book[0])">
+    <div class="jumbotron">
+        <div class="row">
+            <div class="col col-9">
+                <legend>Book Name:</legend>
+                <div class="row">
+                    <div class="col col-10">
+                        <input type="text" class="form-control" [(ngModel)]="book[0].ItemName" name="ItemName" placeholder="Book Name" />
+                    </div>       
+                </div>               
+            </div>
+        </div>
+        <div class="row" *ngFor="bookauthor of bookauthors; let i = index">
+            <div class="col col-4">
+                <legend>Author {{i+1}}</legend>
+            </div>
+            <div class="col col-6">
+                <select class="form-control" [(ngModel)]="bookauthors[i].AuthorID" name="{{bookauthors[i].FirstName}}">
+                    <option value="0" disabled>&lt;Choose an Author&gt;</option>
+                    <option *ngFor="let author of authors;" [(ngValue)]="author.AuthorID">{{author.FirstName}} {{author.LastName}}</option>
+                 </select>
+            </div>
+        </div>
+        <br>
+
+        <div class="row">
+            <div class="col col-4">
+                <legend>Publisher</legend>
+            </div>
+            <div class="col col-6">
+                <select class="form-control" [(ngModel)]="book[0].PublisherID" name="PublisherID">
+                    <option value="0" disabled selected>&lt;Choose a Publisher&gt;</option>
+                    <option *ngFor="let publisher of publishers" [(ngValue)]="publisher.PublisherID" >{{publisher.Name}}</option>
+                 </select>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col col-4">
+                <legend>ISBN 13</legend>
+            </div>
+            <div class="col col-6">
+                <input type="text" class="form-control" [(ngModel)]="book[0].ISBN13" name="ISBN13" placeholder="ISBN 13" />
+            </div> 
+        </div>
+
+        <div class="row">
+            <div class="col col-4">
+                <legend>ISBN 10</legend>
+            </div>
+            <div class="col col-6">
+                <input type="text" class="form-control" [(ngModel)]="book[0].ISBN10" name="ISBN10" placeholder="ISBN 10" />
+            </div>  
+        </div>
+
+        <div class="row">
+            <div class="col col-4">
+                <legend>Cost</legend>
+            </div>
+            <div class="col col-6">
+                <input type="text" class="form-control" [(ngModel)]="book[0].Cost" name="Cost" placeholder="cost $" />
+            </div>  
+        </div>
+
+        <div class="row">
+            <div class="col col-4">
+                <legend>Quantity</legend>
+            </div>
+            <div class="col col-6">
+                <input type="text" class="form-control" [(ngModel)]="book[0].Quantity" name="Quantity" placeholder="Quantity" />
+            </div> 
+        </div>
+
+        <div class="row">
+            <div class="col col-4">
+                <legend>Date Published</legend>
+            </div>
+            <div class="col col-6">
+                <input type="date" class="form-control" [(ngModel)]="datePublished" name="datePublished" value=`datePublished` placeholder="Date Published" />
+            </div> 
+        </div>
+        <br>
+        <div class="row">
+            <div class="col">
+                <button class="btn btn-warning" ><i class="fa fa-save"></i>&nbsp; Update</button>
+            </div>
+            <div class="col" >
+                <div class="text-right">
+                    <button type="button" class="btn btn-danger" (click)="DeleteBook(book[0].ItemId)" ><i class="fa fa-trash"></i>&nbsp; Delete</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

@@ -25,10 +25,17 @@ export class Services {
     private clearrecords: string = 'http://localhost:8080/api/clearrecords';
     private authorUrl: string = 'http://localhost:8080/api/author';
     private publisherUrl: string = 'http://localhost:8080/api/publisher';
+    private bookpublisherUrl: string = 'http://localhost:8080/api/bookpublisher';
+    private bookauthorrUrl: string = 'http://localhost:8080/api/bookauthor';
+    private supplytypes: string = 'http://localhost:8080/api/supplytypes';
+    private addedbookUrl: string = 'http://localhost:8080/api/addedbook'
 
     private EmpId: number = 0;
     private AuthorId: number = 0;
     private PublisherId: number = 0;
+    public BookId: number = 0;
+    private OfficeSupplyId: number = 0;
+    private itemName:string = "";
 
     constructor(private http: HttpClient) {
         
@@ -44,6 +51,23 @@ export class Services {
 
     public getPublisherId(publisherId){
         this.PublisherId = publisherId;
+    }
+
+    public getBookId(bookId){
+        this.BookId = bookId;
+    }
+
+    public getOfficeSupplyId(officeSupplyId){
+        this.OfficeSupplyId = officeSupplyId;
+    }
+
+    public getBookByName(bookName): Observable<any>{
+        this.itemName = bookName;
+        return this.http.get<any>(this.addedbookUrl + '/' + this.itemName);
+    }
+
+    public getAuthorsByBookID(): Observable<any>{
+        return this.http.get<any[]>(this.bookauthorrUrl + '/' + this.BookId);
     }
 
     public getBooks(): Observable<any[]> {
@@ -75,6 +99,14 @@ export class Services {
     }
     public getPublisher(): Observable<any> {
         return this.http.get<any>(this.publisherUrl + '/' + this.PublisherId);
+    }
+
+    public getBook(): Observable<any> {
+        return this.http.get<any>(this.bookUrl + '/' + this.BookId);
+    }
+
+    public getOfficeSupply(): Observable<any> {
+        return this.http.get<any>(this.supplyUrl + '/' + this.OfficeSupplyId);
     }
 
     public getEmployees(): Observable<any[]> {
@@ -113,6 +145,10 @@ export class Services {
         return this.http.get<any[]>(this.supplypurchase);
     }
 
+    public getSupplyTypes(): Observable<any[]>{
+        return this.http.get<any[]>(this.supplytypes);
+    }
+
     public postAuthor(Object: any): Observable<any> {
         return this.http.post<any>(this.authorUrl, Object);
     }
@@ -120,6 +156,23 @@ export class Services {
     public postPublisher(Object: any): Observable<any>{
         return this.http.post<any>(this.publisherUrl, Object);
     }
+
+    public postBook(Object: any): Observable<any>{
+        return this.http.post<any>(this.bookUrl, Object);
+    }
+
+    public postBookPublisher(Object: any):Observable<any>{
+        return this.http.post<any>(this.bookpublisherUrl, Object);
+    }
+
+    public postBookAuthor(Object: any):Observable<any>{
+        return this.http.post<any>(this.bookauthorrUrl, Object);
+    }
+
+    public postOfficeSupply(Object: any): Observable<any>{
+        return this.http.post<any>(this.supplyUrl, Object);
+    }
+
     public postBookFavorite(Object: any): Observable<any>{
         return this.http.post<any>(this.bookfavoriteUrl, Object);
     }
@@ -143,6 +196,22 @@ export class Services {
     public putPublisher(Object: any): Observable<any>{
         return this.http.put<any>(this.publisherUrl + '/' + Object.PublisherID, Object);
     }
+
+    public putBook(Object: any): Observable<any>{
+        return this.http.put<any>(this.bookUrl + '/' + this.BookId, Object);
+    }
+
+    public putBookPublisher(Object: any): Observable<any>{
+        return this.http.put<any>(this.bookpublisherUrl + '/' + this.BookId, Object);
+    }
+
+    public putBookAuthor(Object: any): Observable<any>{
+        return this.http.put<any>(this.bookauthorrUrl + '/' + this.BookId, Object);
+    }
+
+    public putOfficeSupply(Object: any): Observable<any>{
+        return this.http.put<any>(this.supplyUrl + '/' + this.OfficeSupplyId, Object);
+    }
     
     public deleteEmployee(EmpId): Observable<any>{
         return this.http.delete<any>(this.employeeUrl + '/' + EmpId);
@@ -154,6 +223,22 @@ export class Services {
 
     public deletePublisher(PublisherID): Observable<any>{
         return this.http.delete<any>(this.publisherUrl + '/' + PublisherID);
+    }
+
+    public deleteBook(BookID): Observable<any>{
+        return this.http.delete<any>(this.bookUrl + '/' + BookID);
+    }
+
+    public deleteBookPublisher(BookID): Observable<any>{
+        return this.http.delete<any>(this.bookpublisherUrl + '/' + BookID);
+    }
+
+    public deleteBookAuthor(BookID): Observable<any>{
+        return this.http.delete<any>(this.bookauthorrUrl + '/' + BookID);
+    }
+
+    public deleteOfficeSupply(SupplyID): Observable<any>{
+        return this.http.delete<any>(this.supplyUrl + '/' + SupplyID);
     }
 
     public clearRecords(): Observable<any>{
