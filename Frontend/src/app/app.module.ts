@@ -29,6 +29,9 @@ import { BookeditComponent } from './bookedit/bookedit.component';
 import { SupplyviewComponent } from './supplyview/supplyview.component';
 import { SupplyaddComponent } from './supplyadd/supplyadd.component';
 import { SupplyeditComponent } from './supplyedit/supplyedit.component';
+import { BookrentComponent } from './bookrent/bookrent.component';
+import { BookpurchaseComponent } from './bookpurchase/bookpurchase.component';
+import { SupplypurchaseComponent } from './supplypurchase/supplypurchase.component';
 
 let routes = [
   { path: 'home', component: HomeComponent },
@@ -37,7 +40,10 @@ let routes = [
   { path: 'books', component: BooksComponent },
   { path: 'supply', component: SupplyComponent },
   { path: 'bookfavorite', component: BookfavoriteComponent },
+  { path: 'bookrental', component: BookrentComponent },
+  { path: 'bookpurchase', component: BookpurchaseComponent },
   { path: 'supplyfavorite', component: SupplyfavoriteComponent },
+  { path: 'supplypurchase', component: SupplypurchaseComponent },
   { path: 'employeeportal', component: EmployeeportalComponent },
   { path: 'employeeedit', component: EmployeeportaleditComponent },
   { path: 'employeeadd', component: EmployeeportaladdComponent },
@@ -82,7 +88,10 @@ let routes = [
     BookeditComponent,
     SupplyviewComponent,
     SupplyaddComponent,
-    SupplyeditComponent
+    SupplyeditComponent,
+    BookrentComponent,
+    BookpurchaseComponent,
+    SupplypurchaseComponent
   ],
   imports: [
     BrowserModule,

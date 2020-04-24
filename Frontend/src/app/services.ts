@@ -13,15 +13,13 @@ export class Services {
     private bookfavoriteUrl: string = 'http://localhost:8080/api/bookfavorite';
     private supplyUrl: string = 'http://localhost:8080/api/supply';
     private supplysUrl: string = 'http://localhost:8080/api/supplys';
-    private supplyfavoriteUrl: string = 'http://localhost:8080/api/supplyfavorite';
     private userUrl: string = 'http://localhost:8080/api/user';
     private employeeUrl: string = 'http://localhost:8080/api/employee';
     private employeephoneUrl: string  = 'http://localhost:8080/api/employeephone';
-    private bookfavorite: string = 'http://localhost:8080/api/bookfavorite';
-    private bookrental: string = 'http://localhost:8080/api/bookrental';
-    private bookpurchase: string = 'http://localhost:8080/api/bookpurchase';
-    private supplyfavorite: string = 'http://localhost:8080/api/supplyfavorite';
-    private supplypurchase: string = 'http://localhost:8080/api/supplypurchase';
+    private bookrentalUrl: string = 'http://localhost:8080/api/bookrental';
+    private bookpurchaseUrl: string = 'http://localhost:8080/api/bookpurchase';
+    private supplyfavoriteUrl: string = 'http://localhost:8080/api/supplyfavorite';
+    private supplypurchaseUrl: string = 'http://localhost:8080/api/supplypurchase';
     private clearrecords: string = 'http://localhost:8080/api/clearrecords';
     private authorUrl: string = 'http://localhost:8080/api/author';
     private publisherUrl: string = 'http://localhost:8080/api/publisher';
@@ -126,23 +124,23 @@ export class Services {
     }
 
     public getBookFavorite(): Observable<any[]> {
-        return this.http.get<any[]>(this.bookfavorite);
+        return this.http.get<any[]>(this.bookfavoriteUrl);
     }
 
     public getBookRental(): Observable<any[]> {
-        return this.http.get<any[]>(this.bookrental);
+        return this.http.get<any[]>(this.bookrentalUrl);
     }
 
     public getBookPurchase(): Observable<any[]> {
-        return this.http.get<any[]>(this.bookpurchase);
+        return this.http.get<any[]>(this.bookpurchaseUrl);
     }
 
     public getSupplyFavorite(): Observable<any[]> {
-        return this.http.get<any[]>(this.supplyfavorite);
+        return this.http.get<any[]>(this.supplyfavoriteUrl);
     }
 
     public getSupplyPurchase(): Observable<any[]> {
-        return this.http.get<any[]>(this.supplypurchase);
+        return this.http.get<any[]>(this.supplypurchaseUrl);
     }
 
     public getSupplyTypes(): Observable<any[]>{
@@ -177,8 +175,20 @@ export class Services {
         return this.http.post<any>(this.bookfavoriteUrl, Object);
     }
 
+    public postBookRental(Object: any): Observable<any>{
+        return this.http.post<any>(this.bookrentalUrl, Object);
+    }
+
+    public postBookPurchase(Object: any): Observable<any>{
+        return this.http.post<any>(this.bookpurchaseUrl, Object);
+    }
+
     public postSupplyFavorite(Object: any): Observable<any>{
         return this.http.post<any>(this.supplyfavoriteUrl, Object);
+    }
+
+    public postSupplyPurchase(Object: any): Observable<any>{
+        return this.http.post<any>(this.supplypurchaseUrl, Object);
     }
 
     public postEmployee(Object: any): Observable<any>{

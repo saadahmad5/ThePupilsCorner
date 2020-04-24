@@ -11,10 +11,10 @@
 </nav> 
 <br>
 <h3><a [routerLink]="['/supply']" style="color: #68C2E8;"><i class="fa fa-arrow-left"></i></a>&nbsp;
-    Favorite a Supply</h3>
+    Purchase a Supply</h3>
 <br>
 
-<form (ngSubmit)="markAsFavorite()">
+<form (ngSubmit)="markAsPurchase()">
     <div class="jumbotron">
         <div class="row">
             <div class="col col-2">
@@ -39,10 +39,19 @@
                  </select>
             </div>
         </div>
+        <br>
+        <div class="row">
+            <div class="col col-2">
+                <p class="lead">Date</p>
+            </div>
+            <div class="col col-4">
+                <input type="date" class="form-control" [(ngModel)]="Date" name="Date" />
+            </div>
+        </div>
         <div class="row">
             <div class="col text-right">
-                <button type="submit" class="btn btn-primary" [disabled]="((ItemID == 0) || (UserID == 0))">
-                    <i class="fa fa-plus"></i>&nbsp;Add as Favorite
+                <button type="submit" class="btn btn-success" [disabled]="((ItemID == 0) || (UserID == 0))">
+                    <i class="fa fa-plus"></i>&nbsp;Add as Purchase
                 </button>
                 &nbsp;
                 <button type="button" class="btn btn-danger" [routerLink]="['/supply']">
